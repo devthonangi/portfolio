@@ -32,18 +32,49 @@
       z-index: 1000;
       font-size: 1.2rem;
     }
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
     nav a {
       color: #f8fafc;
-      margin-left: 2rem;
       text-decoration: none;
       font-weight: 600;
     }
     nav a:hover {
       text-decoration: underline;
     }
+
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background-color: #1e293b;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 100%;
+        padding: 1rem 2rem;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
     section {
       padding: 120px 3rem;
-      min-height: auto;
       position: relative;
       opacity: 0;
       transform: translateY(40px);
@@ -159,22 +190,24 @@
       text-align: center;
       font-size: 1.3rem;
     }
-      @keyframes gradientFlow {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-      
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
   <header>
     <h2>MyPortfolio</h2>
-    <nav>
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <nav id="nav-links">
       <a href="#hero">Home</a>
       <a href="#about">About</a>
       <a href="#education">Education</a>
@@ -184,30 +217,29 @@
     </nav>
   </header>
 
-  <<section id="hero" class="hero" style="
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 8rem 2rem;
-  background: linear-gradient(270deg, #1e3a8a, #3b82f6, #0f172a);
-  background-size: 600% 600%;
-  animation: gradientFlow 15s ease infinite;
-  color: white;
-  flex-direction: column;
-  gap: 2rem;
-">
-  <img 
-    src="./assets/profile.png" 
-    alt="Profile Picture" 
-    style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 30px rgba(0,0,0,0.4); animation: fadeIn 2s ease forwards;"
-  />
-  <div style="animation: fadeIn 2s ease 0.5s forwards; opacity: 0;">
-    <h1 style="font-size: 3rem; margin-bottom: 1rem;">Hi, I’m Devi Vara Prasad Thonangi</h1>
-    <p style="font-size: 1.4rem; max-width: 700px; margin: 0 auto;">Software Engineer | AI/ML • Backend • Embedded Systems</p>
-    <a href="#contact"><button class="btn" style="margin-top: 2rem;">Contact Me</button></a>
-  </div>
-</section>
+  <section id="hero" class="hero" style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 2rem;
+    background: linear-gradient(270deg, #1e3a8a, #3b82f6, #0f172a);
+    background-size: 600% 600%;
+    animation: gradientFlow 15s ease infinite;
+    color: white;
+    flex-direction: column;
+    gap: 2rem;">
+    <img 
+      src="./assets/profile.png" 
+      alt="Profile Picture" 
+      style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 30px rgba(0,0,0,0.4); animation: fadeIn 2s ease forwards;"
+    />
+    <div style="animation: fadeIn 2s ease 0.5s forwards; opacity: 0;">
+      <h1 style="font-size: 3rem; margin-bottom: 1rem;">Hi, I’m Devi Vara Prasad Thonangi</h1>
+      <p style="font-size: 1.4rem; max-width: 700px; margin: 0 auto;">Software Engineer | AI/ML • Backend • Embedded Systems</p>
+      <a href="#contact"><button class="btn" style="margin-top: 2rem;">Contact Me</button></a>
+    </div>
+  </section>
 
 
   <section id="about">
@@ -322,9 +354,9 @@
   </footer>
 
   <button onclick="topFunction()" id="scrollTopBtn" title="Go to top"><i class="fas fa-chevron-up"></i></button>
-  
+
   <script>
-    // Scroll-based section animation
+    // Scroll reveal
     const sections = document.querySelectorAll('section');
     const revealOnScroll = () => {
       const triggerBottom = window.innerHeight * 0.85;
@@ -338,6 +370,7 @@
     window.addEventListener('scroll', revealOnScroll);
     window.addEventListener('load', revealOnScroll);
 
+    // Scroll-to-top button
     const btn = document.getElementById("scrollTopBtn");
     window.onscroll = function () {
       btn.style.display = (document.documentElement.scrollTop > 200) ? "block" : "none";
@@ -346,6 +379,13 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     }
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
   </script>
 </body>
 </html>
