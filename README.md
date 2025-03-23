@@ -48,11 +48,4 @@ Feel free to connect with me:
 - 💻 [GitHub](https://github.com/devthonangi)
 - 📫 Contact form is live on the site!
 
----
 
-## 🛠 How to Run Locally
-
-```bash
-git clone https://github.com/devthonangi/portfolio.git
-cd portfolio
-# then open index.html in your browser
