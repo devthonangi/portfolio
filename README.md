@@ -37,7 +37,6 @@ Welcome to my developer portfolio! This site highlights my work as a Software De
 
 ![Portfolio Screenshot](./assets/preview.png)
 
-> *(Optional: Add a screenshot of your live site and name it `preview.png` in the `assets` folder)*
 
 ---
 
