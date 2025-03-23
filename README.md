@@ -1,4 +1,4 @@
-# 🌐 Personal Portfolio - Dev Thonangi
+# 🌐 Personal Portfolio - Devi Vara Prasad Thonangi
 
 Welcome to my developer portfolio! This site highlights my work as a Software Development Engineer with experience in AI, Backend, and Embedded Systems. Built using clean HTML with embedded CSS and JavaScript, it's deployed live via Netlify.
 
