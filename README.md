@@ -23,13 +23,13 @@ Welcome to my developer portfolio! This site highlights my work as a Software De
 
 ## 📌 Features
 
-- ✅ Responsive landing page
-- ✅ Gradient-animated hero section with profile picture
-- ✅ Contact form powered by Netlify Forms
-- ✅ Custom thank-you confirmation page
-- ✅ Projects section with direct GitHub links
-- ✅ Categorized and icon-enhanced skills section
-- ✅ Scroll to top button + fade-in animations
+-  Responsive landing page
+-  Gradient-animated hero section with profile picture
+-  Contact form powered by Netlify Forms
+-  Custom thank-you confirmation page
+-  Projects section with direct GitHub links
+-  Categorized and icon-enhanced skills section
+-  Scroll to top button + fade-in animations
 
 ---
 
