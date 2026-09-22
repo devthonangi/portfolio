@@ -140,6 +140,28 @@
     .visual-copy strong { display: block; color: transparent; font-size: clamp(68px, 9vw, 132px); font-weight: 950; letter-spacing: -.08em; line-height: .72; text-transform: uppercase; -webkit-text-stroke: 1px rgba(246,247,255,.55); text-shadow: 14px 14px 0 rgba(156,89,255,.12); }
     .visual-copy strong:last-child { margin-left: 46px; color: var(--white); -webkit-text-stroke: 0; }
     .energy-core { position: absolute; z-index: 3; left: 61%; top: 24%; width: 18px; height: 18px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 18px var(--cyan), 0 0 70px 22px rgba(32,220,255,.18); animation: energy 1.8s ease-in-out infinite; }
+    .profile-card {
+      position: absolute;
+      z-index: 5;
+      right: 28px;
+      bottom: 30px;
+      width: min(330px, calc(100% - 56px));
+      padding: 20px;
+      border: 1px solid rgba(32,220,255,.42);
+      background: rgba(5,7,15,.78);
+      box-shadow: 12px 12px 0 rgba(156,89,255,.11), 0 0 36px rgba(32,220,255,.07);
+      backdrop-filter: blur(14px);
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+      animation: profile-float 5s ease-in-out infinite;
+    }
+    .profile-card::before { content: ""; position: absolute; top: 0; left: 0; width: 76px; height: 2px; background: var(--cyan); box-shadow: 0 0 14px var(--cyan); }
+    .profile-card-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 18px; color: var(--cyan); font-family: monospace; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+    .profile-card-top span:last-child { color: #7fffb9; }
+    .profile-card h2 { margin: 0 0 5px; font-size: 23px; letter-spacing: -.045em; }
+    .profile-card > p { margin: 0; color: var(--muted); font-size: 12px; }
+    .profile-card-data { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+    .profile-card-data small { display: block; margin-bottom: 4px; color: var(--muted); font-family: monospace; font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
+    .profile-card-data strong { display: block; font-size: 11px; font-weight: 650; line-height: 1.4; }
 
     .kanji { position: absolute; z-index: 3; right: 25px; top: 28px; color: rgba(255,255,255,.1); font-size: clamp(70px, 9vw, 130px); font-weight: 900; line-height: .8; writing-mode: vertical-rl; user-select: none; }
     .hud-ring { position: absolute; z-index: 3; left: 13%; top: 16%; width: 170px; height: 170px; border: 1px solid rgba(32,220,255,.32); border-radius: 50%; animation: spin 15s linear infinite; }
@@ -229,6 +251,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes speed-pulse { to { opacity: .5; transform: scale(1.05) rotate(.6deg); } }
     @keyframes energy { 50% { transform: scale(.55); opacity: .45; } }
+    @keyframes profile-float { 50% { transform: translateY(-8px); box-shadow: 16px 20px 0 rgba(156,89,255,.08), 0 0 44px rgba(32,220,255,.1); } }
     @keyframes slash { to { transform: rotate(-38deg) translateX(120px); opacity: .5; } }
 
     @media (max-width: 900px) {
@@ -250,6 +273,7 @@
       .visual { min-height: 560px; margin: 0 -14px; }
       .kanji { font-size: 64px; }
       .visual-copy { left: 8%; }
+      .profile-card { right: 16px; bottom: 18px; width: min(310px, calc(100% - 32px)); }
       .contact-zone { padding: 72px 0; }
       .about-zone { padding: 72px 0; }
       .section-head { align-items: start; flex-direction: column; }
@@ -296,6 +320,17 @@
         <span class="kanji" aria-hidden="true">未来<br>技術</span>
         <span class="hud-ring" aria-hidden="true"></span>
         <span class="hud-label">Neural interface<br>Signal acquired<br>Core synchronized</span>
+        <aside class="profile-card" aria-label="Professional profile card">
+          <div class="profile-card-top"><span>Profile // DT-01</span><span>Active</span></div>
+          <h2>Dev Thonangi</h2>
+          <p>Software Engineer at KeyBank</p>
+          <div class="profile-card-data">
+            <div><small>Base</small><strong>Cleveland, Ohio</strong></div>
+            <div><small>Experience</small><strong>Five years</strong></div>
+            <div><small>Primary focus</small><strong>Production AI</strong></div>
+            <div><small>Systems</small><strong>Edge to cloud</strong></div>
+          </div>
+        </aside>
       </div>
     </section>
 
