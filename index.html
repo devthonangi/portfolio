@@ -1,402 +1,336 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dev Thonangi Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dev Thonangi is a software engineer building AI, computer vision, backend, and cloud systems.">
+  <meta name="theme-color" content="#f4f1e9">
+  <title>Dev Thonangi — Software Engineer</title>
+  <script>document.documentElement.classList.add('motion-ready');</script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --paper: #f4f1e9;
+      --ink: #181816;
+      --muted: #65635d;
+      --line: #cecbc1;
+      --accent: #305cff;
+      --max-width: 1120px;
     }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #0f172a;
-      color: #f8fafc;
-      scroll-behavior: smooth;
-      font-size: 1.2rem;
-      line-height: 1.8;
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
     }
-    header {
-      position: fixed;
-      top: 0;
+
+    a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+    a:hover { color: var(--accent); }
+    button, input, textarea { font: inherit; }
+
+    .shell { width: min(calc(100% - 48px), var(--max-width)); margin: 0 auto; }
+
+    .site-header {
+      min-height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { font-size: 15px; font-weight: 700; text-decoration: none; }
+    .nav { display: flex; gap: 26px; font-size: 14px; }
+    .nav a { text-decoration: none; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(220px, .5fr);
+      gap: 64px;
+      padding: clamp(84px, 14vw, 170px) 0 clamp(90px, 13vw, 155px);
+    }
+    .eyebrow {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(50px, 8vw, 102px);
+      font-weight: 400;
+      letter-spacing: -.055em;
+      line-height: .98;
+    }
+    .hero-copy {
+      align-self: end;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .hero .eyebrow, .hero h1, .hero-copy, .site-header { animation: enter .8s cubic-bezier(.22, 1, .36, 1) both; }
+    .hero h1 { animation-delay: .08s; }
+    .hero-copy { animation-delay: .18s; }
+
+    .motion-ready .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .75s cubic-bezier(.22, 1, .36, 1), transform .75s cubic-bezier(.22, 1, .36, 1);
+    }
+    .motion-ready .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    .section { padding: 90px 0; border-top: 1px solid var(--line); }
+    .section-grid {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: clamp(40px, 8vw, 110px);
+    }
+    .section h2 {
+      margin: 0;
+      font-size: 13px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .lead {
+      max-width: 760px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(29px, 4vw, 44px);
+      letter-spacing: -.025em;
+      line-height: 1.22;
+    }
+    .body-copy { max-width: 720px; margin: 28px 0 0; color: var(--muted); font-size: 17px; }
+
+    .project-list { border-top: 1px solid var(--line); }
+    .project {
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: start;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+    }
+    .project:hover .project-title { color: var(--accent); }
+    .project-number { color: var(--muted); font-size: 13px; }
+    .project-title { margin: 0 0 8px; font-family: Georgia, serif; font-size: 27px; font-weight: 400; transition: color .15s; }
+    .project p { max-width: 680px; margin: 0; color: var(--muted); }
+    .project-arrow { font-size: 22px; line-height: 1; transition: transform .2s ease; }
+    .project:hover .project-arrow { transform: translate(4px, -4px); }
+
+    .skill-groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; }
+    .skill-group h3 { margin: 0 0 14px; font-size: 16px; }
+    .skill-group p { margin: 0; color: var(--muted); line-height: 1.8; }
+
+    .education-row { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+    .education-row:first-child { padding-top: 0; }
+    .education-row strong { display: block; margin-bottom: 4px; font-family: Georgia, serif; font-size: 21px; font-weight: 400; }
+    .education-row span { color: var(--muted); }
+    .education-row .place { text-align: right; }
+
+    .contact-intro { max-width: 720px; margin: 0 0 42px; font-family: Georgia, serif; font-size: clamp(30px, 5vw, 52px); line-height: 1.15; letter-spacing: -.025em; }
+    .contact-form { max-width: 720px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .field { margin-bottom: 18px; }
+    .field label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 700; }
+    .field input, .field textarea {
       width: 100%;
-      background: #1e293b;
-      padding: 1.5rem 3rem;
+      padding: 14px 0;
+      border: 0;
+      border-bottom: 1px solid #9f9c94;
+      border-radius: 0;
+      color: var(--ink);
+      background: transparent;
+      outline: none;
+    }
+    .field textarea { min-height: 110px; resize: vertical; }
+    .field input:focus, .field textarea:focus { border-color: var(--accent); }
+    .submit {
+      margin-top: 12px;
+      padding: 13px 20px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      color: var(--paper);
+      background: var(--ink);
+      cursor: pointer;
+    }
+    .submit:hover { border-color: var(--accent); background: var(--accent); }
+
+    .footer {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      font-size: 1.2rem;
+      gap: 24px;
+      padding: 34px 0 44px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
     }
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
-    nav a {
-      color: #f8fafc;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
+    .footer-links { display: flex; gap: 22px; }
 
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      color: white;
-      cursor: pointer;
-    }
+    .skip-link { position: fixed; top: -100px; left: 12px; z-index: 10; padding: 10px 14px; background: var(--ink); color: white; }
+    .skip-link:focus { top: 12px; }
 
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-        flex-direction: column;
-        background-color: #1e293b;
-        position: absolute;
-        top: 70px;
-        right: 0;
-        width: 100%;
-        padding: 1rem 2rem;
-      }
-
-      nav.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-    }
-
-    section {
-      padding: 120px 3rem;
-      position: relative;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .hero {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding-top: 100px;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-    }
-    .hero p {
-      font-size: 1.4rem;
-      max-width: 800px;
-    }
-    .btn {
-      padding: 1rem 2rem;
-      background: #3b82f6;
-      border: none;
-      color: white;
-      font-weight: bold;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      margin-top: 1.5rem;
-      font-size: 1.2rem;
-    }
-    .projects .project {
-      margin-bottom: 2.5rem;
-    }
-    .projects a {
-      color: #60a5fa;
-      text-decoration: underline;
-      margin-left: 0.5rem;
-    }
-    .skills ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.25rem;
-      margin-top: 1.25rem;
-    }
-    .skills li {
-      background: #1e40af;
-      padding: 0.75rem 1.25rem;
-      border-radius: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 1.2rem;
-    }
-    .skills i {
-      font-size: 1.4rem;
-    }
-    .contact-buttons {
-      display: flex;
-      gap: 1.25rem;
-      margin-top: 2rem;
-      justify-content: center;
-    }
-    .contact-buttons a {
-      text-decoration: none;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 0.5rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 1.15rem;
-    }
-    .github-btn {
-      background-color: #24292e;
-    }
-    .linkedin-btn {
-      background-color: #0a66c2;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #1e293b;
-      font-size: 1.1rem;
-    }
-    #scrollTopBtn {
-      display: none;
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 999;
-      background-color: #3b82f6;
-      color: white;
-      border: none;
-      padding: 1rem;
-      border-radius: 50%;
-      font-size: 1.75rem;
-      cursor: pointer;
-    }
-    #contact p {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    #education h2, #education p {
-      text-align: center;
-      font-size: 1.3rem;
-    }
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+    @keyframes enter {
+      from { opacity: 0; transform: translateY(22px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 760px) {
+      .shell { width: min(calc(100% - 32px), var(--max-width)); }
+      .site-header { min-height: 72px; }
+      .nav { gap: 16px; }
+      .nav a:nth-child(2) { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 38px; padding: 78px 0 88px; }
+      .hero-copy { max-width: 520px; }
+      .section { padding: 68px 0; }
+      .section-grid { grid-template-columns: 1fr; gap: 32px; }
+      .project { grid-template-columns: 32px minmax(0, 1fr); gap: 12px; }
+      .project-arrow { display: none; }
+      .skill-groups { grid-template-columns: 1fr; gap: 30px; }
+      .education-row { grid-template-columns: 1fr; gap: 8px; }
+      .education-row .place { text-align: left; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .hero .eyebrow, .hero h1, .hero-copy, .site-header { animation: none; }
+      .motion-ready .reveal { opacity: 1; transform: none; transition: none; }
+      .project-arrow { transition: none; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h2>DEV</h2>
-    <div class="menu-toggle" id="mobile-menu">
-      <i class="fas fa-bars"></i>
-    </div>
-    <nav id="nav-links">
-      <a href="#hero">Home</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="shell site-header">
+    <a class="brand" href="#top" aria-label="Dev Thonangi, home">DEV THONANGI</a>
+    <nav class="nav" aria-label="Main navigation">
       <a href="#about">About</a>
-      <a href="#education">Education</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <section id="hero" class="hero" style="
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 8rem 2rem;
-    background: linear-gradient(270deg, #1e3a8a, #3b82f6, #0f172a);
-    background-size: 600% 600%;
-    animation: gradientFlow 15s ease infinite;
-    color: white;
-    flex-direction: column;
-    gap: 2rem;">
-    <img 
-      src="./assets/profile.png" 
-      alt="Profile Picture" 
-      style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 30px rgba(0,0,0,0.4); animation: fadeIn 2s ease forwards;"
-    />
-    <div style="animation: fadeIn 2s ease 0.5s forwards; opacity: 0;">
-      <h1 style="font-size: 3rem; margin-bottom: 1rem;">Hi, I’m Dev Thonangi</h1>
-      <p style="font-size: 1.4rem; max-width: 700px; margin: 0 auto;"> AI/ML • Backend & Distributed Systems  • Cloud Infrastructure</p>
-      <a href="#contact"><button class="btn" style="margin-top: 2rem;">Contact Me</button></a>
-    </div>
-  </section>
+  <main id="main">
+    <section class="shell hero" id="top">
+      <div>
+        <p class="eyebrow">Software engineer · AI systems</p>
+        <h1>I build useful software for complex problems.</h1>
+      </div>
+      <p class="hero-copy">I’m Dev, an engineer working across artificial intelligence, computer vision, backend systems, and cloud infrastructure.</p>
+    </section>
 
+    <section class="section reveal" id="about">
+      <div class="shell section-grid">
+        <h2>Profile</h2>
+        <div>
+          <p class="lead">I turn ambitious ideas into reliable systems that work in the real world.</p>
+          <p class="body-copy">My work spans local and edge AI, vision-language applications, real-time inference, and scalable backend services. I care about clear product thinking, pragmatic engineering, and making advanced technology straightforward to use.</p>
+        </div>
+      </div>
+    </section>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I'm a Software Development Engineer specializing in AI/ML with a deep interest in building intelligent, efficient systems across cloud and edge. With 3+ years of experience in deep learning, computer vision, NLP, Edge AI, and distributed backend architectures using Python, Java, and AWS. I enjoy translating complex ideas into practical, scalable solutions. I’ve contributed to real-time inference pipelines, optimized model performance. I thrive in fast-moving, collaborative environments where curiosity, clarity, and problem-solving matter as much as code. Always learning.
-    </p>
-  </section>
+    <section class="section reveal" id="work">
+      <div class="shell section-grid">
+        <h2>Selected work</h2>
+        <div class="project-list">
+          <a class="project" href="https://github.com/devthonangi/multimodal-ai-agent" target="_blank" rel="noopener noreferrer">
+            <span class="project-number">01</span>
+            <div><h3 class="project-title">Local Vision AI</h3><p>A private image-question-answering service with a focused browser interface, FastAPI API, local inference, and response caching.</p></div>
+            <span class="project-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="project" href="https://github.com/devthonangi/ai_market_trends_predictor" target="_blank" rel="noopener noreferrer">
+            <span class="project-number">02</span>
+            <div><h3 class="project-title">Market Trends Predictor</h3><p>A forecasting application combining time-series analysis, natural-language processing, FastAPI, and persistent storage.</p></div>
+            <span class="project-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="project" href="https://github.com/devthonangi/GPU_accelerated_video_processing" target="_blank" rel="noopener noreferrer">
+            <span class="project-number">03</span>
+            <div><h3 class="project-title">GPU Video Processing</h3><p>A real-time deep-learning video pipeline exploring CUDA acceleration and efficient multi-GPU processing.</p></div>
+            <span class="project-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="project" href="https://github.com/devthonangi/scalable_IoT_data_processing" target="_blank" rel="noopener noreferrer">
+            <span class="project-number">04</span>
+            <div><h3 class="project-title">IoT Data Platform</h3><p>An event-driven data system built with Java, Kafka, PostgreSQL, AWS, and infrastructure as code.</p></div>
+            <span class="project-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <p>🎓 Master's in Computer and Information Science (AI Major), Florida Atlantic University, USA</p>
-    <p>🎓 Bachelor of Technology in Computer Science, JNTUk, India</p>
-  </section>
+    <section class="section reveal" id="skills">
+      <div class="shell section-grid">
+        <h2>Capabilities</h2>
+        <div class="skill-groups">
+          <div class="skill-group"><h3>AI & vision</h3><p>PyTorch<br>Computer vision<br>Vision-language models<br>Edge inference</p></div>
+          <div class="skill-group"><h3>Software</h3><p>Python<br>Java & C++<br>FastAPI<br>PostgreSQL & Redis</p></div>
+          <div class="skill-group"><h3>Infrastructure</h3><p>AWS<br>Docker & Linux<br>Kafka<br>CUDA & NVIDIA Jetson</p></div>
+        </div>
+      </div>
+    </section>
 
-  <section id="projects" class="projects">
-    <h2>Projects</h2>
-  
-    <div class="project">
-      <h3>AI Market Trends Predictor</h3>
-      <p>FastAPI, Prophet, NLP, SQLite — AI-powered stock forecasting tool achieving 85% accuracy, processing 1000s of requests/sec.</p>
-      <a href="https://github.com/devthonangi/ai_market_trends_predictor" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> View My Project on GitHub
-      </a>
-    </div>
-  
-    <div class="project">
-      <h3>GPU-Accelerated Video Processing</h3>
-      <p>CUDA, PyTorch, TensorFlow — Real-time deep learning pipeline reducing video processing time by 45% with multi-GPU acceleration.</p>
-      <a href="https://github.com/devthonangi/GPU_accelerated_video_processing" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> View My Project on GitHub
-      </a>
-    </div>
-  
-    <div class="project">
-      <h3>Scalable IoT Data Processing</h3>
-      <p>AWS, Java, Kafka, PostgreSQL, Terraform — Event-driven system processing 10K+ IoT streams, improving data ingestion speed by 50%.</p>
-      <a href="https://github.com/devthonangi/scalable_IoT_data_processing" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> View My Project on GitHub
-      </a>
-    </div>
-  
-    <div class="project">
-      <h3>E-Commerce Recommendation Engine</h3>
-      <p>Python, Django, PostgreSQL, Redis — Collaborative filtering model improving user engagement by 15% and reducing query latency by 35%.</p>
-      <a href="https://github.com/devthonangi/ecommerce-recommendation" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> View My Project on GitHub
-      </a>
-    </div>
-  
-    <div class="project">
-      <h3>FastAPI URL Shortener</h3>
-      <p>FastAPI, SQLite, SHA-256 — High-performance URL shortener with 99.9% uptime and sub-100ms response latency.</p>
-      <a href="https://github.com/devthonangi/fastapi-url-shortener" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> View My Project on GitHub
-      </a>
-    </div>
-  
-  <div class="project">
-    <h3>Skin Disease Classifier</h3>
-    <p>
-      Flask, PyTorch, CNN, HAM10000 — Web app that classifies skin diseases with 94.5% accuracy using a CNN model and a clean UI for image upload & predictions.
-    </p>
-    <a href="https://github.com/devthonangi/skin_disease_classifier" target="_blank" rel="noopener noreferrer">
-      <i class="fab fa-github"></i> View My Project on GitHub
-    </a>
-  </div>
-</section>
-  
-  <section id="skills" class="skills">
-    <h2>Skills</h2>
-  
-    <h3 style="margin-top: 2rem;">Key Technologies</h3>
-    <ul>
-      <li><i class="fab fa-python"></i> Python</li>
-      <li><i class="fab fa-java"></i> Java</li>
-      <li><i class="fab fa-js"></i> JavaScript</li>
-      <li><i class="fas fa-code"></i> C++</li>
-      <li><i class="fab fa-docker"></i> Docker</li>
-      <li><i class="fab fa-aws"></i> AWS</li>
-      <li><i class="fab fa-linux"></i> Linux (Embedded & Server)</li>
-      <li><i class="fas fa-network-wired"></i> FastAPI</li>
-    </ul>
-  
-    <h3 style="margin-top: 2.5rem;">Skills That Make Me Stand Out</h3>
-    <ul>
-      <li><i class="fas fa-microchip"></i> NVIDIA Jetson TX2, Orin, Nano</li>
-      <li><i class="fas fa-brain"></i> PyTorch & Deep Learning</li>
-      <li><i class="fas fa-project-diagram"></i> Scalable Backend Systems</li>
-      <li><i class="fas fa-cogs"></i> CUDA Optimization</li>
-      <li><i class="fas fa-database"></i> PostgreSQL & Redis</li>
-      <li><i class="fas fa-cloud"></i> Serverless & Event-Driven Architecture</li>
-      <li><i class="fas fa-robot"></i> Edge AI & IoT Integration</li>
-    </ul>
-  </section>
-  
+    <section class="section reveal" id="education">
+      <div class="shell section-grid">
+        <h2>Education</h2>
+        <div>
+          <div class="education-row"><div><strong>Master’s in Computer & Information Science</strong><span>Artificial Intelligence</span></div><span class="place">Florida Atlantic University</span></div>
+          <div class="education-row"><div><strong>Bachelor of Technology</strong><span>Computer Science</span></div><span class="place">JNTUK</span></div>
+        </div>
+      </div>
+    </section>
 
-  <!-- Contact  -->
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <p>Let’s connect over a virtual coffee ☕️. Feel free to drop your info and I’ll get back to you!</p>
-  
-    <form name="contact" method="POST" data-netlify="true" action="/thank-you.html"
-        style="max-width: 600px; margin: 2rem auto; display: flex; flex-direction: column; gap: 1rem;">
-        <input type="hidden" name="form-name" value="contact" />
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit" class="btn">Send Message</button>
-    </form>
-  
-    <div class="contact-buttons">
-      <a href="https://github.com/devthonangi" class="github-btn" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> GitHub
-      </a>
-      <a href="https://linkedin.com/in/thonangidev" class="linkedin-btn" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-linkedin"></i> LinkedIn
-      </a>
+    <section class="section reveal" id="contact">
+      <div class="shell section-grid">
+        <h2>Contact</h2>
+        <div>
+          <p class="contact-intro">Have an interesting problem? Let’s talk.</p>
+          <form class="contact-form" name="contact" method="POST" data-netlify="true" action="/thank-you.html">
+            <input type="hidden" name="form-name" value="contact">
+            <div class="form-row">
+              <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div>
+              <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+            </div>
+            <div class="field"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
+            <button class="submit" type="submit">Send message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell footer">
+    <span>© <span id="year"></span> Dev Thonangi</span>
+    <div class="footer-links">
+      <a href="https://github.com/devthonangi" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/thonangidev/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
-  </section>
-  
-  <footer>
-    <p>&copy; 2025 Dev Thonangi. All rights reserved.</p>
   </footer>
 
-  <button onclick="topFunction()" id="scrollTopBtn" title="Go to top"><i class="fas fa-chevron-up"></i></button>
-
   <script>
-    // Scroll reveal
-    const sections = document.querySelectorAll('section');
-    const revealOnScroll = () => {
-      const triggerBottom = window.innerHeight * 0.85;
-      sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < triggerBottom) {
-          section.classList.add('visible');
+    document.querySelector('#year').textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
         }
       });
-    };
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll);
+    }, { threshold: 0.12 });
 
-    // Scroll-to-top button
-    const btn = document.getElementById("scrollTopBtn");
-    window.onscroll = function () {
-      btn.style.display = (document.documentElement.scrollTop > 200) ? "block" : "none";
-    };
-    function topFunction() {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    }
-
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('mobile-menu');
-    const navLinks = document.getElementById('nav-links');
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
+    document.querySelectorAll('.reveal').forEach((section) => observer.observe(section));
   </script>
 </body>
 </html>
