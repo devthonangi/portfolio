@@ -181,6 +181,14 @@
     .info-card h3 { position: relative; margin: 0 0 14px; font-size: 23px; letter-spacing: -.035em; }
     .info-card p { position: relative; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
     .info-card.primary p { max-width: 560px; font-size: 16px; }
+    .info-card.snapshot { grid-column: 1 / -1; min-height: auto; }
+    .snapshot .card-index { margin-bottom: 24px; }
+    .snapshot-grid { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    .snapshot-item { min-width: 0; padding: 4px 22px 4px 0; }
+    .snapshot-item + .snapshot-item { padding-left: 22px; border-left: 1px solid var(--line); }
+    .snapshot-item small { display: block; margin-bottom: 9px; color: var(--cyan); font-family: monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }
+    .snapshot-item strong { display: block; margin-bottom: 5px; font-size: 15px; line-height: 1.35; }
+    .snapshot-item span { display: block; color: var(--muted); font-size: 12px; line-height: 1.5; }
     .reveal-card { opacity: 0; translate: 0 34px; transition: opacity .7s cubic-bezier(.22,1,.36,1), translate .7s cubic-bezier(.22,1,.36,1), transform .16s ease; }
     .reveal-card.visible { opacity: 1; translate: 0 0; }
     .reveal-card:nth-child(2) { transition-delay: .1s; }
@@ -224,6 +232,8 @@
       .contact-grid { grid-template-columns: 1fr; }
       .about-cards { grid-template-columns: 1fr 1fr; }
       .info-card.primary { grid-column: 1 / -1; }
+      .snapshot-grid { grid-template-columns: 1fr 1fr; gap: 24px 0; }
+      .snapshot-item:nth-child(3) { padding-left: 0; border-left: 0; }
     }
     @media (max-width: 580px) {
       .shell { width: min(calc(100% - 28px), 1320px); }
@@ -239,6 +249,10 @@
       .section-head { align-items: start; flex-direction: column; }
       .about-cards { grid-template-columns: 1fr; }
       .info-card.primary { grid-column: auto; }
+      .info-card.snapshot { grid-column: auto; }
+      .snapshot-grid { grid-template-columns: 1fr; gap: 20px; }
+      .snapshot-item, .snapshot-item + .snapshot-item { padding: 0 0 20px; border-left: 0; border-bottom: 1px solid var(--line); }
+      .snapshot-item:last-child { padding-bottom: 0; border-bottom: 0; }
       .form-grid { grid-template-columns: 1fr; }
       .field.full { grid-column: auto; }
       footer { align-items: flex-start; flex-direction: column; justify-content: center; }
@@ -299,6 +313,15 @@
             <span class="card-index">HOW I WORK // 02</span>
             <h3>How I work</h3>
             <p>I’m curious, practical, and collaborative. I ask questions early, communicate tradeoffs clearly, and care about reliability just as much as new ideas. Good work, to me, should make life easier for the people using it.</p>
+          </article>
+          <article class="info-card snapshot reveal-card" data-tilt>
+            <span class="card-index">CAREER // AT_A_GLANCE</span>
+            <div class="snapshot-grid">
+              <div class="snapshot-item"><small>Now</small><strong>Software Engineer</strong><span>KeyBank · Cleveland, Ohio</span></div>
+              <div class="snapshot-item"><small>Experience</small><strong>Five years</strong><span>Banking, healthcare, research, and distributed systems</span></div>
+              <div class="snapshot-item"><small>Focus</small><strong>Production AI systems</strong><span>Computer vision, inference, backend services, edge and cloud</span></div>
+              <div class="snapshot-item"><small>Education</small><strong>MS in Computer Science</strong><span>AI major · Florida Atlantic University · 4.0 GPA</span></div>
+            </div>
           </article>
         </div>
       </div>
