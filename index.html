@@ -1,306 +1,402 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Dev Thonangi, a Cleveland-based software engineer building dependable AI and backend systems.">
-  <meta name="theme-color" content="#f5f5f3">
-  <title>Dev Thonangi</title>
-  <script>document.documentElement.classList.add('js');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dev Thonangi Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    :root {
-      color-scheme: light;
-      --page: #f6f6f4;
-      --window: #fff;
-      --chrome: #efeeeb;
-      --text: #302f2d;
-      --muted: #77736e;
-      --line: #dad8d2;
-      --accent: #7047eb;
-      --accent-soft: #f0ebff;
-      --shadow: rgba(45, 43, 38, .12);
-    }
-
-    :root.dark {
-      color-scheme: dark;
-      --page: #111217;
-      --window: #181a21;
-      --chrome: #22242c;
-      --text: #eeede9;
-      --muted: #9a9792;
-      --line: #34363e;
-      --accent: #a68cff;
-      --accent-soft: rgba(166,140,255,.1);
-      --shadow: rgba(0,0,0,.42);
-    }
-
-    * { box-sizing: border-box; }
-    body {
-      min-height: 100vh;
+    * {
       margin: 0;
-      display: grid;
-      place-items: center;
-      padding: 42px 22px;
-      color: var(--text);
-      background: var(--page);
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-      transition: color .25s, background .25s;
-      -webkit-font-smoothing: antialiased;
+      padding: 0;
+      box-sizing: border-box;
     }
-    button, input, textarea { font: inherit; }
-    a { color: inherit; }
-
-    .window {
-      width: min(100%, 780px);
-      min-height: min(760px, calc(100vh - 84px));
-      overflow: hidden;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--window);
-      box-shadow: 0 28px 76px var(--shadow);
-      animation: enter .65s cubic-bezier(.22,1,.36,1) both;
-      transition: background .25s, border-color .25s;
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      scroll-behavior: smooth;
+      font-size: 1.2rem;
+      line-height: 1.8;
     }
-
-    .titlebar {
-      min-height: 60px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #1e293b;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      padding: 0 22px;
-      border-bottom: 1px solid var(--line);
-      background: var(--chrome);
-      transition: background .25s, border-color .25s;
+      z-index: 1000;
+      font-size: 1.2rem;
     }
-    .traffic { display: flex; gap: 9px; }
-    .traffic span { width: 12px; height: 12px; border-radius: 50%; }
-    .traffic span:nth-child(1) { background: #ff5f57; }
-    .traffic span:nth-child(2) { background: #febc2e; }
-    .traffic span:nth-child(3) { background: #28c840; }
-    .domain { color: var(--muted); font-size: 14px; letter-spacing: .03em; }
-    .theme {
-      justify-self: end;
-      width: 38px;
-      height: 38px;
-      border: 0;
-      border-radius: 50%;
-      color: var(--text);
-      background: transparent;
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+    nav a {
+      color: #f8fafc;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      color: white;
       cursor: pointer;
-      font-size: 16px;
     }
-    .theme:hover { background: var(--accent-soft); }
 
-    .view-stack { position: relative; min-height: 0; }
-    .view { display: none; padding: clamp(32px, 7vw, 54px); animation: view-in .3s ease both; }
-    .view.active { display: block; }
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background-color: #1e293b;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 100%;
+        padding: 1rem 2rem;
+      }
 
-    .identity { display: flex; align-items: center; gap: 24px; }
-    .monogram {
-      width: 92px;
-      height: 92px;
-      flex: 0 0 auto;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      color: var(--accent);
-      background: var(--accent-soft);
-      font-size: 28px;
-      font-weight: 800;
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
     }
-    h1 { margin: 0; color: var(--accent); font-size: clamp(24px,5vw,31px); letter-spacing: -.045em; }
-    .name-line { width: 190px; height: 1px; margin: 15px 0; background: var(--muted); transform-origin: left; animation: line-in .8s .2s both; }
-    .handle { margin: 0; color: var(--muted); }
-    .intro { margin: 56px 0 46px; font-size: clamp(20px,3.5vw,27px); line-height: 1.7; letter-spacing: -.035em; }
 
-    .menu { display: grid; gap: 7px; }
-    .menu button {
-      min-height: 45px;
-      display: grid;
-      grid-template-columns: 52px 28px 1fr;
+    section {
+      padding: 120px 3rem;
+      position: relative;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      margin: 0 -12px;
-      padding: 0 12px;
-      border: 0;
-      border-radius: 8px;
-      color: var(--text);
-      background: transparent;
-      text-align: left;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero p {
+      font-size: 1.4rem;
+      max-width: 800px;
+    }
+    .btn {
+      padding: 1rem 2rem;
+      background: #3b82f6;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 0.5rem;
       cursor: pointer;
-      transition: color .15s, background .15s, transform .15s;
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
     }
-    .menu button:hover, .menu button:focus-visible { color: var(--accent); background: var(--accent-soft); outline: none; transform: translateX(5px); }
-    .shortcut, .path { color: var(--muted); font-size: 13px; }
-    .menu-label { font-family: Arial, Helvetica, sans-serif; font-size: 21px; }
-
-    .socials { display: flex; flex-wrap: wrap; gap: 25px; margin-top: 48px; }
-    .socials a { color: var(--muted); font-size: 13px; text-decoration: none; }
-    .socials a:hover { color: var(--accent); }
-
-    .view-header { display: flex; align-items: center; gap: 14px; margin-bottom: 34px; }
-    .back { padding: 0; border: 0; color: var(--muted); background: none; cursor: pointer; }
-    .back:hover { color: var(--accent); }
-    .view h2 { margin: 0; color: var(--accent); font-size: 25px; }
-    .lead { margin: 0 0 24px; font-family: Arial, Helvetica, sans-serif; font-size: clamp(22px,4vw,31px); font-weight: 600; line-height: 1.35; letter-spacing: -.025em; }
-    .copy { margin: 0; color: var(--muted); font-family: Arial, Helvetica, sans-serif; font-size: 15px; line-height: 1.7; }
-
-    .timeline { display: grid; gap: 0; }
-    .job { display: grid; grid-template-columns: 125px 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--line); }
-    .job:first-child { padding-top: 0; }
-    .job time { color: var(--muted); font-size: 11px; line-height: 1.5; }
-    .job h3 { margin: 0 0 5px; font-family: Arial, Helvetica, sans-serif; font-size: 17px; }
-    .job p { margin: 0; color: var(--muted); font-family: Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.55; }
-
-    .skill-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .skill { padding: 16px; border: 1px solid var(--line); border-radius: 8px; }
-    .skill strong { display: block; margin-bottom: 7px; font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
-    .skill span { color: var(--muted); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.5; }
-
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .field { margin-bottom: 13px; }
-    .field.full { grid-column: 1 / -1; }
-    label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 11px; }
-    input, textarea { width: 100%; padding: 12px; border: 1px solid var(--line); border-radius: 7px; outline: none; color: var(--text); background: var(--chrome); }
-    textarea { min-height: 110px; resize: vertical; }
-    input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-    .send { width: 100%; min-height: 44px; border: 0; border-radius: 7px; color: white; background: var(--accent); font-weight: 800; cursor: pointer; }
-
-    .statusbar { min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 0 22px; border-top: 1px solid var(--line); color: var(--muted); background: var(--chrome); font-size: 11px; transition: background .25s, border-color .25s; }
-    .status-help { display: flex; gap: 18px; }
-
-    @keyframes enter { from { opacity: 0; transform: translateY(22px) scale(.985); } to { opacity: 1; transform: none; } }
-    @keyframes view-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
-    @keyframes line-in { from { transform: scaleX(0); } }
-
-    @media (max-width: 580px) {
-      body { padding: 14px 10px; align-items: start; }
-      .window { min-height: calc(100vh - 28px); border-radius: 13px; }
-      .titlebar { min-height: 51px; padding: 0 14px; }
-      .traffic span { width: 10px; height: 10px; }
-      .domain { font-size: 11px; }
-      .view { padding: 30px 23px; }
-      .identity { gap: 15px; }
-      .monogram { width: 68px; height: 68px; font-size: 21px; }
-      .name-line { width: 130px; }
-      .intro { margin: 42px 0 34px; }
-      .menu button { grid-template-columns: 44px 25px 1fr; }
-      .job { grid-template-columns: 1fr; gap: 6px; }
-      .skill-list, .form-grid { grid-template-columns: 1fr; }
-      .field.full { grid-column: auto; }
-      .statusbar { padding: 0 14px; }
-      .status-help { display: none; }
+    .projects .project {
+      margin-bottom: 2.5rem;
     }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+    .projects a {
+      color: #60a5fa;
+      text-decoration: underline;
+      margin-left: 0.5rem;
+    }
+    .skills ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+    .skills li {
+      background: #1e40af;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.2rem;
+    }
+    .skills i {
+      font-size: 1.4rem;
+    }
+    .contact-buttons {
+      display: flex;
+      gap: 1.25rem;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+    .contact-buttons a {
+      text-decoration: none;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.15rem;
+    }
+    .github-btn {
+      background-color: #24292e;
+    }
+    .linkedin-btn {
+      background-color: #0a66c2;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #1e293b;
+      font-size: 1.1rem;
+    }
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 999;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 50%;
+      font-size: 1.75rem;
+      cursor: pointer;
+    }
+    #contact p {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    #education h2, #education p {
+      text-align: center;
+      font-size: 1.3rem;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
-  <main class="window">
-    <header class="titlebar">
-      <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-      <span class="domain">devthonangi.dev</span>
-      <button class="theme" id="theme" type="button" aria-label="Switch to dark theme">dark</button>
-    </header>
-
-    <div class="view-stack">
-      <section class="view active" id="home" aria-labelledby="name">
-        <div class="identity">
-          <div class="monogram" aria-hidden="true">DT</div>
-          <div><h1 id="name">Dev Thonangi</h1><div class="name-line"></div><p class="handle">dev@cleveland#</p></div>
-        </div>
-        <p class="intro">Software Engineer.<br>Problem Solver. Reliable Builder.</p>
-        <nav class="menu" aria-label="Portfolio sections">
-          <button type="button" data-view="about" data-key="a"><span class="shortcut">[a]</span><span class="path">~/</span><span class="menu-label">about</span></button>
-          <button type="button" data-view="career" data-key="c"><span class="shortcut">[c]</span><span class="path">~/</span><span class="menu-label">career</span></button>
-          <button type="button" data-view="skills" data-key="s"><span class="shortcut">[s]</span><span class="path">~/</span><span class="menu-label">skills</span></button>
-          <button type="button" data-view="contact" data-key="m"><span class="shortcut">[m]</span><span class="path">~/</span><span class="menu-label">message</span></button>
-        </nav>
-        <div class="socials"><a href="https://github.com/devthonangi" target="_blank" rel="noopener noreferrer">github</a><a href="https://www.linkedin.com/in/thonangidev/" target="_blank" rel="noopener noreferrer">linkedin</a></div>
-      </section>
-
-      <section class="view" id="about" aria-labelledby="about-title">
-        <div class="view-header"><button class="back" type="button">[x] back</button><h2 id="about-title">~/about</h2></div>
-        <p class="lead">I build technology people can rely on.</p>
-        <p class="copy">I’m a Cleveland-based software engineer with five years of experience. I currently work at KeyBank, building AI-enabled data and automation workflows for enterprise banking. I enjoy taking complicated ideas, finding the part that matters most, and turning it into software that is useful, understandable, and dependable.</p>
-        <p class="copy" style="margin-top:20px">I’m curious, practical, and collaborative. I ask questions early, communicate tradeoffs clearly, and care about reliability just as much as new ideas.</p>
-      </section>
-
-      <section class="view" id="career" aria-labelledby="career-title">
-        <div class="view-header"><button class="back" type="button">[x] back</button><h2 id="career-title">~/career</h2></div>
-        <div class="timeline">
-          <article class="job"><time>2026 — Present</time><div><h3>Software Engineer · KeyBank</h3><p>AI-enabled data and automation workflows for enterprise banking applications.</p></div></article>
-          <article class="job"><time>2025 — 2026</time><div><h3>AI Engineer · UnitedHealth Group</h3><p>Scalable inference services, distributed processing, evaluation, and monitoring.</p></div></article>
-          <article class="job"><time>2024 — 2025</time><div><h3>Computer Vision & Edge AI · FAU</h3><p>Real-time vision, NVIDIA Jetson deployment, GPU optimization, and model validation.</p></div></article>
-          <article class="job"><time>2022 — 2023</time><div><h3>Systems Engineer · Infosys</h3><p>Cloud-native services, event-driven architectures, and distributed backend systems.</p></div></article>
-          <article class="job"><time>2021 — 2022</time><div><h3>IT Associate · VCB</h3><p>High-availability banking systems, incident analysis, and operational support.</p></div></article>
-        </div>
-      </section>
-
-      <section class="view" id="skills" aria-labelledby="skills-title">
-        <div class="view-header"><button class="back" type="button">[x] back</button><h2 id="skills-title">~/skills</h2></div>
-        <div class="skill-list">
-          <div class="skill"><strong>AI & computer vision</strong><span>PyTorch, OpenCV, YOLOv8, UNet, multimodal AI, RAG</span></div>
-          <div class="skill"><strong>Accelerated computing</strong><span>CUDA, TensorRT, ONNX Runtime, NVIDIA Jetson, Nsight</span></div>
-          <div class="skill"><strong>Backend systems</strong><span>Python, Java, C++, FastAPI, Spring Boot, REST APIs</span></div>
-          <div class="skill"><strong>Cloud & infrastructure</strong><span>AWS, Kubernetes, Docker, Terraform, Linux</span></div>
-          <div class="skill"><strong>Distributed systems</strong><span>Kafka, RabbitMQ, microservices, streaming data</span></div>
-          <div class="skill"><strong>Education</strong><span>MS Computer Science, AI major, FAU, 4.0 GPA</span></div>
-        </div>
-      </section>
-
-      <section class="view" id="contact" aria-labelledby="contact-title">
-        <div class="view-header"><button class="back" type="button">[x] back</button><h2 id="contact-title">~/message</h2></div>
-        <p class="copy" style="margin-bottom:24px">Have a role, collaboration, or problem worth solving? Send a short note and I’ll get back to you.</p>
-        <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
-          <input type="hidden" name="form-name" value="contact">
-          <div class="form-grid">
-            <div class="field"><label for="contact-name">name</label><input id="contact-name" name="name" autocomplete="name" required></div>
-            <div class="field"><label for="email">email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-            <div class="field full"><label for="message">message</label><textarea id="message" name="message" required></textarea></div>
-          </div>
-          <button class="send" type="submit">send message</button>
-        </form>
-      </section>
+  <header>
+    <h2>DEV</h2>
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
     </div>
+    <nav id="nav-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <footer class="statusbar"><span>Cleveland, Ohio</span><div class="status-help"><span>[a] about</span><span>[c] career</span><span>[s] skills</span><span>[m] message</span></div></footer>
-  </main>
+  <section id="hero" class="hero" style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 2rem;
+    background: linear-gradient(270deg, #1e3a8a, #3b82f6, #0f172a);
+    background-size: 600% 600%;
+    animation: gradientFlow 15s ease infinite;
+    color: white;
+    flex-direction: column;
+    gap: 2rem;">
+    <img 
+      src="./assets/profile.png" 
+      alt="Profile Picture" 
+      style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 30px rgba(0,0,0,0.4); animation: fadeIn 2s ease forwards;"
+    />
+    <div style="animation: fadeIn 2s ease 0.5s forwards; opacity: 0;">
+      <h1 style="font-size: 3rem; margin-bottom: 1rem;">Hi, I’m Dev Thonangi</h1>
+      <p style="font-size: 1.4rem; max-width: 700px; margin: 0 auto;"> AI/ML • Backend & Distributed Systems  • Cloud Infrastructure</p>
+      <a href="#contact"><button class="btn" style="margin-top: 2rem;">Contact Me</button></a>
+    </div>
+  </section>
+
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I'm a Software Development Engineer specializing in AI/ML with a deep interest in building intelligent, efficient systems across cloud and edge. With 3+ years of experience in deep learning, computer vision, NLP, Edge AI, and distributed backend architectures using Python, Java, and AWS. I enjoy translating complex ideas into practical, scalable solutions. I’ve contributed to real-time inference pipelines, optimized model performance. I thrive in fast-moving, collaborative environments where curiosity, clarity, and problem-solving matter as much as code. Always learning.
+    </p>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <p>🎓 Master's in Computer and Information Science (AI Major), Florida Atlantic University, USA</p>
+    <p>🎓 Bachelor of Technology in Computer Science, JNTUk, India</p>
+  </section>
+
+  <section id="projects" class="projects">
+    <h2>Projects</h2>
+  
+    <div class="project">
+      <h3>AI Market Trends Predictor</h3>
+      <p>FastAPI, Prophet, NLP, SQLite — AI-powered stock forecasting tool achieving 85% accuracy, processing 1000s of requests/sec.</p>
+      <a href="https://github.com/devthonangi/ai_market_trends_predictor" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github"></i> View My Project on GitHub
+      </a>
+    </div>
+  
+    <div class="project">
+      <h3>GPU-Accelerated Video Processing</h3>
+      <p>CUDA, PyTorch, TensorFlow — Real-time deep learning pipeline reducing video processing time by 45% with multi-GPU acceleration.</p>
+      <a href="https://github.com/devthonangi/GPU_accelerated_video_processing" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github"></i> View My Project on GitHub
+      </a>
+    </div>
+  
+    <div class="project">
+      <h3>Scalable IoT Data Processing</h3>
+      <p>AWS, Java, Kafka, PostgreSQL, Terraform — Event-driven system processing 10K+ IoT streams, improving data ingestion speed by 50%.</p>
+      <a href="https://github.com/devthonangi/scalable_IoT_data_processing" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github"></i> View My Project on GitHub
+      </a>
+    </div>
+  
+    <div class="project">
+      <h3>E-Commerce Recommendation Engine</h3>
+      <p>Python, Django, PostgreSQL, Redis — Collaborative filtering model improving user engagement by 15% and reducing query latency by 35%.</p>
+      <a href="https://github.com/devthonangi/ecommerce-recommendation" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github"></i> View My Project on GitHub
+      </a>
+    </div>
+  
+    <div class="project">
+      <h3>FastAPI URL Shortener</h3>
+      <p>FastAPI, SQLite, SHA-256 — High-performance URL shortener with 99.9% uptime and sub-100ms response latency.</p>
+      <a href="https://github.com/devthonangi/fastapi-url-shortener" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github"></i> View My Project on GitHub
+      </a>
+    </div>
+  
+  <div class="project">
+    <h3>Skin Disease Classifier</h3>
+    <p>
+      Flask, PyTorch, CNN, HAM10000 — Web app that classifies skin diseases with 94.5% accuracy using a CNN model and a clean UI for image upload & predictions.
+    </p>
+    <a href="https://github.com/devthonangi/skin_disease_classifier" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-github"></i> View My Project on GitHub
+    </a>
+  </div>
+</section>
+  
+  <section id="skills" class="skills">
+    <h2>Skills</h2>
+  
+    <h3 style="margin-top: 2rem;">Key Technologies</h3>
+    <ul>
+      <li><i class="fab fa-python"></i> Python</li>
+      <li><i class="fab fa-java"></i> Java</li>
+      <li><i class="fab fa-js"></i> JavaScript</li>
+      <li><i class="fas fa-code"></i> C++</li>
+      <li><i class="fab fa-docker"></i> Docker</li>
+      <li><i class="fab fa-aws"></i> AWS</li>
+      <li><i class="fab fa-linux"></i> Linux (Embedded & Server)</li>
+      <li><i class="fas fa-network-wired"></i> FastAPI</li>
+    </ul>
+  
+    <h3 style="margin-top: 2.5rem;">Skills That Make Me Stand Out</h3>
+    <ul>
+      <li><i class="fas fa-microchip"></i> NVIDIA Jetson TX2, Orin, Nano</li>
+      <li><i class="fas fa-brain"></i> PyTorch & Deep Learning</li>
+      <li><i class="fas fa-project-diagram"></i> Scalable Backend Systems</li>
+      <li><i class="fas fa-cogs"></i> CUDA Optimization</li>
+      <li><i class="fas fa-database"></i> PostgreSQL & Redis</li>
+      <li><i class="fas fa-cloud"></i> Serverless & Event-Driven Architecture</li>
+      <li><i class="fas fa-robot"></i> Edge AI & IoT Integration</li>
+    </ul>
+  </section>
+  
+
+  <!-- Contact  -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>Let’s connect over a virtual coffee ☕️. Feel free to drop your info and I’ll get back to you!</p>
+  
+    <form name="contact" method="POST" data-netlify="true" action="/thank-you.html"
+        style="max-width: 600px; margin: 2rem auto; display: flex; flex-direction: column; gap: 1rem;">
+        <input type="hidden" name="form-name" value="contact" />
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+    </form>
+  
+    <div class="contact-buttons">
+      <a href="https://github.com/devthonangi" class="github-btn" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="https://linkedin.com/in/thonangidev" class="linkedin-btn" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+    </div>
+  </section>
+  
+  <footer>
+    <p>&copy; 2025 Dev Thonangi. All rights reserved.</p>
+  </footer>
+
+  <button onclick="topFunction()" id="scrollTopBtn" title="Go to top"><i class="fas fa-chevron-up"></i></button>
 
   <script>
-    const root = document.documentElement;
-    const views = [...document.querySelectorAll('.view')];
-    const themeButton = document.querySelector('#theme');
+    // Scroll reveal
+    const sections = document.querySelectorAll('section');
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.85;
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < triggerBottom) {
+          section.classList.add('visible');
+        }
+      });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
 
-    function showView(id, updateHash = true) {
-      const target = document.getElementById(id) || document.getElementById('home');
-      views.forEach((view) => view.classList.toggle('active', view === target));
-      if (updateHash) history.replaceState(null, '', id === 'home' ? location.pathname : `#${id}`);
-      target.querySelector('h1, h2, input')?.focus?.({ preventScroll: true });
+    // Scroll-to-top button
+    const btn = document.getElementById("scrollTopBtn");
+    window.onscroll = function () {
+      btn.style.display = (document.documentElement.scrollTop > 200) ? "block" : "none";
+    };
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
     }
 
-    function toggleTheme() {
-      const dark = !root.classList.contains('dark');
-      root.classList.toggle('dark', dark);
-      themeButton.textContent = dark ? 'light' : 'dark';
-      themeButton.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
-    }
-
-    document.querySelectorAll('[data-view]').forEach((button) => button.addEventListener('click', () => showView(button.dataset.view)));
-    document.querySelectorAll('.back').forEach((button) => button.addEventListener('click', () => showView('home')));
-    themeButton.addEventListener('click', toggleTheme);
-
-    document.addEventListener('keydown', (event) => {
-      if (/input|textarea/i.test(document.activeElement.tagName)) return;
-      const key = event.key.toLowerCase();
-      const shortcuts = { a: 'about', c: 'career', s: 'skills', m: 'contact' };
-      if (shortcuts[key]) showView(shortcuts[key]);
-      if (key === 'x' || key === 'escape') showView('home');
-      if (key === 't') toggleTheme();
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
     });
-
-    showView(location.hash.slice(1) || 'home', false);
   </script>
 </body>
 </html>
