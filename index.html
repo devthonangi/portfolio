@@ -3,19 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Contact Dev Thonangi, a software engineer working across AI, computer vision, backend systems, and cloud infrastructure.">
-  <meta name="theme-color" content="#08090d">
-  <title>Dev Thonangi — Contact</title>
+  <meta name="description" content="Dev Thonangi — software engineer working across AI, computer vision, backend systems, and cloud infrastructure.">
+  <meta name="theme-color" content="#0c0d11">
+  <title>Dev Thonangi</title>
   <style>
     :root {
       color-scheme: dark;
-      --background: #08090d;
-      --surface: rgba(18, 20, 28, .78);
-      --text: #f5f6fa;
-      --muted: #9a9eab;
-      --line: rgba(255, 255, 255, .12);
-      --accent: #8b7cff;
-      --accent-two: #4fd1c5;
+      --page: #0c0d11;
+      --window: #12141a;
+      --chrome: #1b1d24;
+      --text: #e9e7e1;
+      --muted: #8e9098;
+      --line: #30323a;
+      --accent: #8c72ff;
+      --accent-soft: rgba(140, 114, 255, .13);
+      --shadow: rgba(0, 0, 0, .42);
+    }
+
+    :root.light {
+      color-scheme: light;
+      --page: #f7f7f5;
+      --window: #fff;
+      --chrome: #efeeeb;
+      --text: #2b2a28;
+      --muted: #74716d;
+      --line: #d7d5cf;
+      --accent: #7548ff;
+      --accent-soft: rgba(117, 72, 255, .08);
+      --shadow: rgba(45, 42, 35, .12);
     }
 
     * { box-sizing: border-box; }
@@ -23,199 +38,284 @@
     body {
       min-height: 100vh;
       margin: 0;
-      overflow-x: hidden;
+      display: grid;
+      place-items: center;
+      padding: 48px 24px;
       color: var(--text);
-      background: var(--background);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--page);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      transition: color .3s ease, background .3s ease;
       -webkit-font-smoothing: antialiased;
     }
 
-    body::before, body::after {
-      content: "";
-      position: fixed;
-      z-index: -1;
-      width: 36rem;
-      height: 36rem;
-      border-radius: 50%;
-      filter: blur(110px);
-      opacity: .18;
-      pointer-events: none;
-      animation: drift 13s ease-in-out infinite alternate;
-    }
-    body::before { top: -16rem; left: -12rem; background: var(--accent); }
-    body::after { right: -14rem; bottom: -18rem; background: var(--accent-two); animation-delay: -6s; }
-
-    a { color: inherit; }
     button, input, textarea { font: inherit; }
+    a { color: inherit; }
 
-    .page {
-      min-height: 100vh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      width: min(calc(100% - 40px), 1080px);
-      margin: 0 auto;
+    .window {
+      width: min(100%, 760px);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--window);
+      box-shadow: 0 28px 80px var(--shadow);
+      animation: window-in .75s cubic-bezier(.22, 1, .36, 1) both;
+      transition: background .3s ease, border-color .3s ease;
     }
 
-    header, footer {
+    .titlebar {
+      min-height: 58px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--line);
+      background: var(--chrome);
+      transition: background .3s ease, border-color .3s ease;
+    }
+    .traffic { display: flex; gap: 9px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot.red { background: #ff5f57; }
+    .dot.yellow { background: #febc2e; }
+    .dot.green { background: #28c840; }
+    .domain { color: var(--muted); font-size: 14px; letter-spacing: .03em; }
+    .theme-toggle {
+      justify-self: end;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      color: var(--text);
+      background: transparent;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .theme-toggle:hover { background: var(--accent-soft); }
+
+    .content { padding: clamp(32px, 7vw, 56px); }
+
+    .identity { display: flex; align-items: center; gap: 24px; }
+    .monogram {
+      width: 88px;
+      height: 88px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--accent);
+      background: var(--accent-soft);
+      font-size: 28px;
+      font-weight: 800;
+      animation: float 5s ease-in-out infinite;
+    }
+    h1 { margin: 0; color: var(--accent); font-size: clamp(24px, 5vw, 30px); letter-spacing: -.04em; }
+    .rule { width: 180px; height: 1px; margin: 15px 0; background: var(--muted); transform-origin: left; animation: draw-line .85s .3s both; }
+    .handle { margin: 0; color: var(--muted); }
+
+    .summary {
+      margin: 58px 0 48px;
+      font-size: clamp(20px, 4vw, 27px);
+      line-height: 1.7;
+      letter-spacing: -.035em;
+    }
+    .cursor { display: inline-block; width: .55em; height: 1em; margin-left: 4px; vertical-align: -.12em; background: var(--accent); animation: blink 1s steps(1) infinite; }
+
+    .menu { display: grid; gap: 8px; }
+    .menu-link {
+      display: grid;
+      grid-template-columns: 48px 28px 1fr;
+      align-items: center;
+      min-height: 45px;
+      margin: 0 -12px;
+      padding: 0 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 21px;
+      transition: color .16s, background .16s, transform .16s;
+    }
+    .menu-link:hover, .menu-link:focus-visible { color: var(--accent); background: var(--accent-soft); outline: none; transform: translateX(5px); }
+    .key, .path { color: var(--muted); font-family: "SFMono-Regular", Consolas, monospace; font-size: 14px; }
+    .menu-link:hover .path { color: var(--accent); }
+
+    .socials { display: flex; flex-wrap: wrap; gap: 26px; margin-top: 50px; }
+    .socials a { color: var(--muted); font-size: 14px; text-decoration: none; }
+    .socials a:hover { color: var(--accent); }
+
+    .statusbar {
+      min-height: 51px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      min-height: 76px;
+      gap: 18px;
+      padding: 0 20px;
+      border-top: 1px solid var(--line);
       color: var(--muted);
-      font-size: 13px;
+      background: var(--chrome);
+      font-size: 12px;
+      transition: background .3s ease, border-color .3s ease;
     }
-    .brand { color: var(--text); font-weight: 750; letter-spacing: .08em; text-decoration: none; }
-    .availability { display: flex; align-items: center; gap: 8px; }
-    .availability::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #68e09b;
-      box-shadow: 0 0 0 5px rgba(104, 224, 155, .09);
-      animation: pulse 2.4s ease-in-out infinite;
+    .status-right { display: flex; gap: 16px; }
+    .statusbar button { padding: 0; border: 0; color: inherit; background: none; cursor: pointer; }
+    .statusbar button:hover { color: var(--accent); }
+
+    .contact-panel {
+      display: none;
+      padding: 0 clamp(32px, 7vw, 56px) clamp(34px, 7vw, 54px);
+      animation: panel-in .3s ease both;
     }
-
-    main { display: grid; place-items: center; padding: 58px 0 78px; }
-
-    .contact-card {
-      position: relative;
-      width: min(100%, 620px);
-      overflow: hidden;
-      padding: clamp(26px, 6vw, 48px);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: var(--surface);
-      box-shadow: 0 28px 90px rgba(0, 0, 0, .38);
-      backdrop-filter: blur(18px);
-      animation: card-in .8s cubic-bezier(.22, 1, .36, 1) both;
-    }
-    .contact-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -65%;
-      width: 45%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      animation: scan 4.5s ease-in-out infinite;
-    }
-
-    .intro { margin-bottom: 34px; }
-    .label { margin: 0 0 15px; color: var(--accent-two); font-size: 12px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
-    h1 { margin: 0; font-size: clamp(35px, 7vw, 58px); letter-spacing: -.055em; line-height: 1.02; }
-    .intro p:last-child { max-width: 500px; margin: 16px 0 0; color: var(--muted); line-height: 1.65; }
-
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .field { margin-bottom: 15px; }
+    .contact-panel.open { display: block; }
+    .contact-panel h2 { margin: 0 0 22px; color: var(--accent); font-size: 19px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { margin-bottom: 12px; }
     .field.full { grid-column: 1 / -1; }
-    label { display: block; margin: 0 0 7px; color: #c5c8d1; font-size: 12px; font-weight: 650; }
+    label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 12px; }
     input, textarea {
       width: 100%;
-      padding: 13px 14px;
+      padding: 11px 12px;
       border: 1px solid var(--line);
-      border-radius: 11px;
+      border-radius: 7px;
       outline: none;
       color: var(--text);
-      background: rgba(7, 8, 12, .6);
-      transition: border-color .18s, box-shadow .18s;
+      background: var(--chrome);
     }
-    textarea { min-height: 104px; resize: vertical; }
-    input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(139, 124, 255, .12); }
+    textarea { min-height: 86px; resize: vertical; }
+    input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .send { width: 100%; min-height: 43px; border: 0; border-radius: 7px; color: white; background: var(--accent); font-weight: 800; cursor: pointer; }
+    .send:hover { filter: brightness(1.1); }
 
-    .submit {
-      width: 100%;
-      min-height: 48px;
-      border: 0;
-      border-radius: 11px;
-      color: #0b0c10;
-      background: linear-gradient(120deg, var(--accent-two), #b6aaff, var(--accent-two));
-      background-size: 220% 100%;
-      font-weight: 800;
-      cursor: pointer;
-      animation: button-flow 5s linear infinite;
-      transition: transform .18s, box-shadow .18s;
-    }
-    .submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(114, 217, 207, .2); }
-    .submit:active { transform: translateY(0); }
-
-    .socials { display: flex; justify-content: center; gap: 22px; margin-top: 24px; font-size: 13px; }
-    .socials a { color: var(--muted); text-decoration: none; }
-    .socials a:hover { color: var(--text); }
-
-    footer { border-top: 1px solid var(--line); }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--text); }
-
-    @keyframes card-in { from { opacity: 0; transform: translateY(24px) scale(.985); } to { opacity: 1; transform: none; } }
-    @keyframes drift { to { transform: translate(70px, 55px) scale(1.1); } }
-    @keyframes pulse { 50% { opacity: .45; transform: scale(.8); } }
-    @keyframes scan { 0%, 12% { left: -65%; } 55%, 100% { left: 120%; } }
-    @keyframes button-flow { to { background-position: 220% 0; } }
+    @keyframes window-in { from { opacity: 0; transform: translateY(24px) scale(.98); } to { opacity: 1; transform: none; } }
+    @keyframes panel-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+    @keyframes float { 50% { transform: translateY(-6px); } }
+    @keyframes draw-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes blink { 50% { opacity: 0; } }
 
     @media (max-width: 580px) {
-      .page { width: min(calc(100% - 24px), 1080px); }
-      header { min-height: 66px; }
-      .availability span { display: none; }
-      main { align-items: start; padding: 28px 0 50px; }
-      .contact-card { border-radius: 18px; }
+      body { padding: 16px 12px; }
+      .window { border-radius: 13px; }
+      .titlebar { min-height: 50px; padding: 0 14px; }
+      .dot { width: 10px; height: 10px; }
+      .domain { font-size: 11px; }
+      .content { padding: 30px 24px 36px; }
+      .identity { gap: 16px; }
+      .monogram { width: 66px; height: 66px; font-size: 22px; }
+      .rule { width: 130px; }
+      .summary { margin: 42px 0 34px; }
+      .menu-link { grid-template-columns: 42px 24px 1fr; font-size: 19px; }
+      .socials { margin-top: 38px; gap: 20px; }
+      .statusbar { padding: 0 14px; }
+      .status-right { display: none; }
+      .contact-panel { padding: 0 24px 34px; }
       .form-grid { grid-template-columns: 1fr; gap: 0; }
       .field.full { grid-column: auto; }
-      footer { min-height: 66px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <a class="brand" href="/">DEV</a>
-      <div class="availability"><span>Open to conversations</span></div>
-    </header>
+  <main class="window">
+    <div class="titlebar">
+      <div class="traffic" aria-hidden="true">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+      </div>
+      <span class="domain">devthonangi.dev</span>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">☀</button>
+    </div>
 
-    <main>
-      <section class="contact-card" aria-labelledby="contact-title">
-        <div class="intro">
-          <p class="label">Software engineer · AI systems</p>
-          <h1 id="contact-title">Let’s build something useful.</h1>
-          <p>I work across AI, computer vision, backend systems, and cloud infrastructure. Send a short note and I’ll get back to you.</p>
+    <div class="content">
+      <div class="identity">
+        <div class="monogram" aria-hidden="true">DT</div>
+        <div>
+          <h1>Dev Thonangi</h1>
+          <div class="rule"></div>
+          <p class="handle">dev@systems#</p>
         </div>
+      </div>
 
-        <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
-          <input type="hidden" name="form-name" value="contact">
-          <div class="form-grid">
-            <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" autocomplete="name" required>
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" required>
-            </div>
-            <div class="field full">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" required></textarea>
-            </div>
-          </div>
-          <button class="submit" type="submit">Send message →</button>
-        </form>
+      <p class="summary">Software Engineer.<br>AI Builder. Systems Thinker.<span class="cursor" aria-hidden="true"></span></p>
 
-        <div class="socials" aria-label="Social links">
-          <a href="https://github.com/devthonangi" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          <a href="https://www.linkedin.com/in/thonangidev/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      <nav class="menu" aria-label="Portfolio navigation">
+        <a class="menu-link" href="https://github.com/devthonangi" target="_blank" rel="noopener noreferrer" data-key="g">
+          <span class="key">[g]</span><span class="path">~/</span><span>github</span>
+        </a>
+        <a class="menu-link" href="https://www.linkedin.com/in/thonangidev/" target="_blank" rel="noopener noreferrer" data-key="l">
+          <span class="key">[l]</span><span class="path">~/</span><span>linkedin</span>
+        </a>
+        <a class="menu-link" href="#contact" id="contact-link" data-key="c">
+          <span class="key">[c]</span><span class="path">~/</span><span>contact</span>
+        </a>
+      </nav>
+
+      <div class="socials">
+        <a href="https://github.com/devthonangi" target="_blank" rel="noopener noreferrer">github</a>
+        <a href="https://www.linkedin.com/in/thonangidev/" target="_blank" rel="noopener noreferrer">linkedin</a>
+        <a href="#contact" id="email-link">message</a>
+      </div>
+    </div>
+
+    <section class="contact-panel" id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">~/contact</h2>
+      <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
+        <input type="hidden" name="form-name" value="contact">
+        <div class="form-grid">
+          <div class="field"><label for="name">name</label><input id="name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="email">email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field full"><label for="message">message</label><textarea id="message" name="message" required></textarea></div>
         </div>
-      </section>
-    </main>
+        <button class="send" type="submit">send →</button>
+      </form>
+    </section>
 
-    <footer>
-      <span>© <span id="year"></span> Dev Thonangi</span>
-      <a href="https://github.com/devthonangi" target="_blank" rel="noopener noreferrer">Software & systems</a>
-    </footer>
-  </div>
+    <div class="statusbar">
+      <span>● Boca Raton, FL</span>
+      <div class="status-right"><button type="button" id="close-contact">[x] close</button><span>[c] contact</span><span>[t] theme</span></div>
+    </div>
+  </main>
 
-  <script>document.querySelector('#year').textContent = new Date().getFullYear();</script>
+  <script>
+    const root = document.documentElement;
+    const toggle = document.querySelector('#theme-toggle');
+    const panel = document.querySelector('#contact');
+    const contactLink = document.querySelector('#contact-link');
+    const emailLink = document.querySelector('#email-link');
+    const closeContact = document.querySelector('#close-contact');
+
+    function setTheme(light) {
+      root.classList.toggle('light', light);
+      toggle.textContent = light ? '☾' : '☀';
+      toggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
+    }
+
+    function toggleContact(force) {
+      const open = typeof force === 'boolean' ? force : !panel.classList.contains('open');
+      panel.classList.toggle('open', open);
+      if (open) {
+        history.replaceState(null, '', '#contact');
+        requestAnimationFrame(() => document.querySelector('#name').focus());
+      } else {
+        history.replaceState(null, '', location.pathname);
+      }
+    }
+
+    toggle.addEventListener('click', () => setTheme(!root.classList.contains('light')));
+    contactLink.addEventListener('click', (event) => { event.preventDefault(); toggleContact(); });
+    emailLink.addEventListener('click', (event) => { event.preventDefault(); toggleContact(true); });
+    closeContact.addEventListener('click', () => toggleContact(false));
+
+    document.addEventListener('keydown', (event) => {
+      if (/input|textarea/i.test(document.activeElement.tagName)) return;
+      const key = event.key.toLowerCase();
+      if (key === 'c') toggleContact();
+      if (key === 't') setTheme(!root.classList.contains('light'));
+      if (key === 'g') window.open('https://github.com/devthonangi', '_blank', 'noopener');
+      if (key === 'l') window.open('https://www.linkedin.com/in/thonangidev/', '_blank', 'noopener');
+      if (key === 'escape' || key === 'x') toggleContact(false);
+    });
+
+    if (location.hash === '#contact') toggleContact(true);
+  </script>
 </body>
 </html>
