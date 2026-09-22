@@ -3,35 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Dev Thonangi, a Cleveland-based software engineer building dependable AI and backend systems.">
-  <meta name="theme-color" content="#f5f5f3">
-  <title>Dev Thonangi</title>
-  <script>document.documentElement.classList.add('js');</script>
+  <meta name="description" content="Contact Dev Thonangi, a Cleveland-based software engineer building dependable AI and backend systems.">
+  <meta name="theme-color" content="#090a0f">
+  <title>Dev Thonangi — Contact</title>
   <style>
     :root {
-      color-scheme: light;
-      --page: #f6f6f4;
-      --window: #fff;
-      --chrome: #efeeeb;
-      --text: #302f2d;
-      --muted: #77736e;
-      --line: #dad8d2;
-      --accent: #7047eb;
-      --accent-soft: #f0ebff;
-      --shadow: rgba(45, 43, 38, .12);
-    }
-
-    :root.dark {
       color-scheme: dark;
-      --page: #111217;
-      --window: #181a21;
-      --chrome: #22242c;
-      --text: #eeede9;
-      --muted: #9a9792;
-      --line: #34363e;
-      --accent: #a68cff;
-      --accent-soft: rgba(166,140,255,.1);
-      --shadow: rgba(0,0,0,.42);
+      --page: #090a0f;
+      --card: #11131a;
+      --text: #f4f4f2;
+      --muted: #9699a5;
+      --line: rgba(255,255,255,.11);
+      --lime: #c9ff4a;
+      --violet: #7b61ff;
     }
 
     * { box-sizing: border-box; }
@@ -40,267 +24,195 @@
       margin: 0;
       display: grid;
       place-items: center;
-      padding: 42px 22px;
+      padding: 28px;
       color: var(--text);
-      background: var(--page);
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-      transition: color .25s, background .25s;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(123,97,255,.17), transparent 31%),
+        radial-gradient(circle at 88% 78%, rgba(201,255,74,.09), transparent 28%),
+        var(--page);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-    button, input, textarea { font: inherit; }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .3;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at center, black, transparent 82%);
+    }
+
     a { color: inherit; }
+    button, input, textarea { font: inherit; }
 
-    .window {
-      width: min(100%, 780px);
-      min-height: min(760px, calc(100vh - 84px));
+    .contact-card {
+      position: relative;
+      width: min(100%, 960px);
       overflow: hidden;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--window);
-      box-shadow: 0 28px 76px var(--shadow);
-      animation: enter .65s cubic-bezier(.22,1,.36,1) both;
-      transition: background .25s, border-color .25s;
+      border-radius: 30px;
+      background: rgba(17,19,26,.9);
+      box-shadow: 0 40px 110px rgba(0,0,0,.48);
+      backdrop-filter: blur(22px);
+      animation: card-in .75s cubic-bezier(.22,1,.36,1) both;
     }
 
-    .titlebar {
-      min-height: 60px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+    .card-main { display: grid; grid-template-columns: 1.18fr .82fr; min-height: 540px; }
+    .identity { position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(32px,6vw,64px); }
+    .identity::after { content: ""; position: absolute; top: 10%; right: 0; width: 1px; height: 80%; background: linear-gradient(transparent, var(--line), transparent); }
+    .label { margin: 0; color: var(--lime); font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    h1 { margin: 28px 0 0; font-size: clamp(58px,9vw,110px); font-weight: 750; letter-spacing: -.08em; line-height: .78; }
+    h1 span { display: block; color: transparent; -webkit-text-stroke: 1px rgba(244,244,242,.48); }
+    .summary { max-width: 580px; margin: 36px 0 0; color: var(--muted); font-size: 17px; line-height: 1.65; }
+    .summary strong { color: var(--text); font-weight: 560; }
+    .identity-footer { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 40px; }
+    .tag { padding: 8px 11px; border: 1px solid var(--line); border-radius: 999px; color: #bdc0ca; font-size: 11px; }
+
+    .connect { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(30px,5vw,52px); background: rgba(255,255,255,.022); }
+    .availability { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 12px; }
+    .availability::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 18px rgba(201,255,74,.7); animation: pulse 2.2s ease-in-out infinite; }
+    .connect-copy h2 { margin: 0 0 14px; font-size: clamp(28px,4vw,43px); letter-spacing: -.05em; line-height: 1.05; }
+    .connect-copy p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+    .actions { display: grid; gap: 10px; margin-top: 30px; }
+    .action {
+      min-height: 51px;
+      display: flex;
       align-items: center;
-      padding: 0 22px;
-      border-bottom: 1px solid var(--line);
-      background: var(--chrome);
-      transition: background .25s, border-color .25s;
-    }
-    .traffic { display: flex; gap: 9px; }
-    .traffic span { width: 12px; height: 12px; border-radius: 50%; }
-    .traffic span:nth-child(1) { background: #ff5f57; }
-    .traffic span:nth-child(2) { background: #febc2e; }
-    .traffic span:nth-child(3) { background: #28c840; }
-    .domain { color: var(--muted); font-size: 14px; letter-spacing: .03em; }
-    .theme {
-      justify-self: end;
-      width: 38px;
-      height: 38px;
-      border: 0;
-      border-radius: 50%;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 0 17px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
       color: var(--text);
       background: transparent;
+      text-decoration: none;
       cursor: pointer;
-      font-size: 16px;
+      transition: color .18s, border-color .18s, background .18s, transform .18s;
     }
-    .theme:hover { background: var(--accent-soft); }
+    .action:hover { color: var(--lime); border-color: rgba(201,255,74,.4); background: rgba(201,255,74,.045); transform: translateX(4px); }
+    .action.primary { border-color: var(--lime); color: #0d1005; background: var(--lime); font-weight: 800; }
+    .action.primary:hover { color: #0d1005; background: #d6ff73; transform: translateY(-2px); }
+    .action small { color: currentColor; opacity: .62; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
 
-    .view-stack { position: relative; min-height: 0; }
-    .view { display: none; padding: clamp(32px, 7vw, 54px); animation: view-in .3s ease both; }
-    .view.active { display: block; }
+    .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding-top: 30px; border-top: 1px solid var(--line); }
+    .meta small { display: block; margin-bottom: 5px; color: var(--muted); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }
+    .meta strong { font-size: 12px; font-weight: 600; }
 
-    .identity { display: flex; align-items: center; gap: 24px; }
-    .monogram {
-      width: 92px;
-      height: 92px;
-      flex: 0 0 auto;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      color: var(--accent);
-      background: var(--accent-soft);
-      font-size: 28px;
-      font-weight: 800;
-    }
-    h1 { margin: 0; color: var(--accent); font-size: clamp(24px,5vw,31px); letter-spacing: -.045em; }
-    .name-line { width: 190px; height: 1px; margin: 15px 0; background: var(--muted); transform-origin: left; animation: line-in .8s .2s both; }
-    .handle { margin: 0; color: var(--muted); }
-    .intro { margin: 56px 0 46px; font-size: clamp(20px,3.5vw,27px); line-height: 1.7; letter-spacing: -.035em; }
-
-    .menu { display: grid; gap: 7px; }
-    .menu button {
-      min-height: 45px;
-      display: grid;
-      grid-template-columns: 52px 28px 1fr;
-      align-items: center;
-      margin: 0 -12px;
-      padding: 0 12px;
-      border: 0;
-      border-radius: 8px;
-      color: var(--text);
-      background: transparent;
-      text-align: left;
-      cursor: pointer;
-      transition: color .15s, background .15s, transform .15s;
-    }
-    .menu button:hover, .menu button:focus-visible { color: var(--accent); background: var(--accent-soft); outline: none; transform: translateX(5px); }
-    .shortcut, .path { color: var(--muted); font-size: 13px; }
-    .menu-label { font-family: Arial, Helvetica, sans-serif; font-size: 21px; }
-
-    .socials { display: flex; flex-wrap: wrap; gap: 25px; margin-top: 48px; }
-    .socials a { color: var(--muted); font-size: 13px; text-decoration: none; }
-    .socials a:hover { color: var(--accent); }
-
-    .view-header { display: flex; align-items: center; gap: 14px; margin-bottom: 34px; }
-    .back { padding: 0; border: 0; color: var(--muted); background: none; cursor: pointer; }
-    .back:hover { color: var(--accent); }
-    .view h2 { margin: 0; color: var(--accent); font-size: 25px; }
-    .lead { margin: 0 0 24px; font-family: Arial, Helvetica, sans-serif; font-size: clamp(22px,4vw,31px); font-weight: 600; line-height: 1.35; letter-spacing: -.025em; }
-    .copy { margin: 0; color: var(--muted); font-family: Arial, Helvetica, sans-serif; font-size: 15px; line-height: 1.7; }
-
-    .timeline { display: grid; gap: 0; }
-    .job { display: grid; grid-template-columns: 125px 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--line); }
-    .job:first-child { padding-top: 0; }
-    .job time { color: var(--muted); font-size: 11px; line-height: 1.5; }
-    .job h3 { margin: 0 0 5px; font-family: Arial, Helvetica, sans-serif; font-size: 17px; }
-    .job p { margin: 0; color: var(--muted); font-family: Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.55; }
-
-    .skill-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .skill { padding: 16px; border: 1px solid var(--line); border-radius: 8px; }
-    .skill strong { display: block; margin-bottom: 7px; font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
-    .skill span { color: var(--muted); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.5; }
+    .message-panel { max-height: 0; overflow: hidden; border-top: 0 solid var(--line); background: #0c0e14; transition: max-height .55s cubic-bezier(.22,1,.36,1), border-width .2s; }
+    .message-panel.open { max-height: 620px; border-top-width: 1px; }
+    .message-inner { display: grid; grid-template-columns: .65fr 1.35fr; gap: clamp(32px,6vw,80px); padding: clamp(30px,5vw,52px); }
+    .message-intro h2 { margin: 0 0 12px; font-size: 28px; letter-spacing: -.04em; }
+    .message-intro p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .close { margin-top: 22px; padding: 0; border: 0; color: var(--muted); background: none; cursor: pointer; font-size: 12px; text-decoration: underline; text-underline-offset: 4px; }
+    .close:hover { color: var(--text); }
 
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .field { margin-bottom: 13px; }
+    .field { margin-bottom: 12px; }
     .field.full { grid-column: 1 / -1; }
-    label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 11px; }
-    input, textarea { width: 100%; padding: 12px; border: 1px solid var(--line); border-radius: 7px; outline: none; color: var(--text); background: var(--chrome); }
-    textarea { min-height: 110px; resize: vertical; }
-    input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-    .send { width: 100%; min-height: 44px; border: 0; border-radius: 7px; color: white; background: var(--accent); font-weight: 800; cursor: pointer; }
+    label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    input, textarea { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 9px; outline: none; color: var(--text); background: #12151d; }
+    textarea { min-height: 96px; resize: vertical; }
+    input:focus, textarea:focus { border-color: var(--lime); box-shadow: 0 0 0 3px rgba(201,255,74,.08); }
+    .send { width: 100%; min-height: 45px; border: 0; border-radius: 9px; color: #0d1005; background: var(--lime); font-weight: 800; cursor: pointer; }
+    .send:hover { background: #d6ff73; }
 
-    .statusbar { min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 0 22px; border-top: 1px solid var(--line); color: var(--muted); background: var(--chrome); font-size: 11px; transition: background .25s, border-color .25s; }
-    .status-help { display: flex; gap: 18px; }
+    .card-line { position: absolute; top: 0; left: -30%; width: 30%; height: 2px; background: linear-gradient(90deg, transparent, var(--lime), transparent); animation: scan 5s ease-in-out infinite; }
 
-    @keyframes enter { from { opacity: 0; transform: translateY(22px) scale(.985); } to { opacity: 1; transform: none; } }
-    @keyframes view-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
-    @keyframes line-in { from { transform: scaleX(0); } }
+    @keyframes card-in { from { opacity: 0; transform: translateY(26px) scale(.985); } to { opacity: 1; transform: none; } }
+    @keyframes pulse { 50% { opacity: .4; transform: scale(.72); } }
+    @keyframes scan { 0%,15% { left: -30%; } 65%,100% { left: 110%; } }
 
-    @media (max-width: 580px) {
-      body { padding: 14px 10px; align-items: start; }
-      .window { min-height: calc(100vh - 28px); border-radius: 13px; }
-      .titlebar { min-height: 51px; padding: 0 14px; }
-      .traffic span { width: 10px; height: 10px; }
-      .domain { font-size: 11px; }
-      .view { padding: 30px 23px; }
-      .identity { gap: 15px; }
-      .monogram { width: 68px; height: 68px; font-size: 21px; }
-      .name-line { width: 130px; }
-      .intro { margin: 42px 0 34px; }
-      .menu button { grid-template-columns: 44px 25px 1fr; }
-      .job { grid-template-columns: 1fr; gap: 6px; }
-      .skill-list, .form-grid { grid-template-columns: 1fr; }
+    @media (max-width: 760px) {
+      body { padding: 14px; align-items: start; }
+      .contact-card { border-radius: 20px; }
+      .card-main { grid-template-columns: 1fr; }
+      .identity { min-height: 500px; }
+      .identity::after { top: auto; left: 7%; right: auto; bottom: 0; width: 86%; height: 1px; background: linear-gradient(90deg, transparent, var(--line), transparent); }
+      .connect { min-height: 470px; }
+      .message-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: clamp(56px,20vw,82px); }
+      .identity { min-height: 460px; padding: 30px 24px; }
+      .connect { min-height: 450px; padding: 30px 24px; }
+      .form-grid { grid-template-columns: 1fr; }
       .field.full { grid-column: auto; }
-      .statusbar { padding: 0 14px; }
-      .status-help { display: none; }
+      .meta { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
   </style>
 </head>
 <body>
-  <main class="window">
-    <header class="titlebar">
-      <div class="traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-      <span class="domain">devthonangi.dev</span>
-      <button class="theme" id="theme" type="button" aria-label="Switch to dark theme">dark</button>
-    </header>
-
-    <div class="view-stack">
-      <section class="view active" id="home" aria-labelledby="name">
-        <div class="identity">
-          <div class="monogram" aria-hidden="true">DT</div>
-          <div><h1 id="name">Dev Thonangi</h1><div class="name-line"></div><p class="handle">dev@cleveland#</p></div>
+  <main class="contact-card">
+    <span class="card-line" aria-hidden="true"></span>
+    <div class="card-main">
+      <section class="identity" aria-labelledby="name">
+        <div>
+          <p class="label">Software Engineer · Cleveland, Ohio</p>
+          <h1 id="name">Dev<span>Thonangi</span></h1>
+          <p class="summary"><strong>I turn difficult technical problems into dependable products.</strong> Five years of experience across AI, computer vision, backend systems, edge computing, and cloud infrastructure.</p>
         </div>
-        <p class="intro">Software Engineer.<br>Problem Solver. Reliable Builder.</p>
-        <nav class="menu" aria-label="Portfolio sections">
-          <button type="button" data-view="about" data-key="a"><span class="shortcut">[a]</span><span class="path">~/</span><span class="menu-label">about</span></button>
-          <button type="button" data-view="career" data-key="c"><span class="shortcut">[c]</span><span class="path">~/</span><span class="menu-label">career</span></button>
-          <button type="button" data-view="skills" data-key="s"><span class="shortcut">[s]</span><span class="path">~/</span><span class="menu-label">skills</span></button>
-          <button type="button" data-view="contact" data-key="m"><span class="shortcut">[m]</span><span class="path">~/</span><span class="menu-label">message</span></button>
-        </nav>
-        <div class="socials"><a href="https://github.com/devthonangi" target="_blank" rel="noopener noreferrer">github</a><a href="https://www.linkedin.com/in/thonangidev/" target="_blank" rel="noopener noreferrer">linkedin</a></div>
+        <div class="identity-footer" aria-label="Focus areas"><span class="tag">AI systems</span><span class="tag">Computer vision</span><span class="tag">Backend</span><span class="tag">Cloud</span></div>
       </section>
 
-      <section class="view" id="about" aria-labelledby="about-title">
-        <div class="view-header"><button class="back" type="button">[x] back</button><h2 id="about-title">~/about</h2></div>
-        <p class="lead">I build technology people can rely on.</p>
-        <p class="copy">I’m a Cleveland-based software engineer with five years of experience. I currently work at KeyBank, building AI-enabled data and automation workflows for enterprise banking. I enjoy taking complicated ideas, finding the part that matters most, and turning it into software that is useful, understandable, and dependable.</p>
-        <p class="copy" style="margin-top:20px">I’m curious, practical, and collaborative. I ask questions early, communicate tradeoffs clearly, and care about reliability just as much as new ideas.</p>
-      </section>
-
-      <section class="view" id="career" aria-labelledby="career-title">
-        <div class="view-header"><button class="back" type="button">[x] back</button><h2 id="career-title">~/career</h2></div>
-        <div class="timeline">
-          <article class="job"><time>2026 — Present</time><div><h3>Software Engineer · KeyBank</h3><p>AI-enabled data and automation workflows for enterprise banking applications.</p></div></article>
-          <article class="job"><time>2025 — 2026</time><div><h3>AI Engineer · UnitedHealth Group</h3><p>Scalable inference services, distributed processing, evaluation, and monitoring.</p></div></article>
-          <article class="job"><time>2024 — 2025</time><div><h3>Computer Vision & Edge AI · FAU</h3><p>Real-time vision, NVIDIA Jetson deployment, GPU optimization, and model validation.</p></div></article>
-          <article class="job"><time>2022 — 2023</time><div><h3>Systems Engineer · Infosys</h3><p>Cloud-native services, event-driven architectures, and distributed backend systems.</p></div></article>
-          <article class="job"><time>2021 — 2022</time><div><h3>IT Associate · VCB</h3><p>High-availability banking systems, incident analysis, and operational support.</p></div></article>
-        </div>
-      </section>
-
-      <section class="view" id="skills" aria-labelledby="skills-title">
-        <div class="view-header"><button class="back" type="button">[x] back</button><h2 id="skills-title">~/skills</h2></div>
-        <div class="skill-list">
-          <div class="skill"><strong>AI & computer vision</strong><span>PyTorch, OpenCV, YOLOv8, UNet, multimodal AI, RAG</span></div>
-          <div class="skill"><strong>Accelerated computing</strong><span>CUDA, TensorRT, ONNX Runtime, NVIDIA Jetson, Nsight</span></div>
-          <div class="skill"><strong>Backend systems</strong><span>Python, Java, C++, FastAPI, Spring Boot, REST APIs</span></div>
-          <div class="skill"><strong>Cloud & infrastructure</strong><span>AWS, Kubernetes, Docker, Terraform, Linux</span></div>
-          <div class="skill"><strong>Distributed systems</strong><span>Kafka, RabbitMQ, microservices, streaming data</span></div>
-          <div class="skill"><strong>Education</strong><span>MS Computer Science, AI major, FAU, 4.0 GPA</span></div>
-        </div>
-      </section>
-
-      <section class="view" id="contact" aria-labelledby="contact-title">
-        <div class="view-header"><button class="back" type="button">[x] back</button><h2 id="contact-title">~/message</h2></div>
-        <p class="copy" style="margin-bottom:24px">Have a role, collaboration, or problem worth solving? Send a short note and I’ll get back to you.</p>
-        <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
-          <input type="hidden" name="form-name" value="contact">
-          <div class="form-grid">
-            <div class="field"><label for="contact-name">name</label><input id="contact-name" name="name" autocomplete="name" required></div>
-            <div class="field"><label for="email">email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-            <div class="field full"><label for="message">message</label><textarea id="message" name="message" required></textarea></div>
+      <section class="connect" aria-labelledby="connect-title">
+        <div class="availability">Available for conversations</div>
+        <div class="connect-copy">
+          <h2 id="connect-title">Let’s make something useful.</h2>
+          <p>I currently build AI-enabled enterprise workflows at KeyBank. If you have a role, collaboration, or problem worth solving, get in touch.</p>
+          <div class="actions">
+            <button class="action primary" id="message-button" type="button"><span>Send a message</span><small>Open form</small></button>
+            <a class="action" href="https://www.linkedin.com/in/thonangidev/" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><small>Connect</small></a>
+            <a class="action" href="https://github.com/devthonangi" target="_blank" rel="noopener noreferrer"><span>GitHub</span><small>View profile</small></a>
           </div>
-          <button class="send" type="submit">send message</button>
-        </form>
+        </div>
+        <div class="meta"><div><small>Current role</small><strong>Software Engineer · KeyBank</strong></div><div><small>Experience</small><strong>Five years</strong></div></div>
       </section>
     </div>
 
-    <footer class="statusbar"><span>Cleveland, Ohio</span><div class="status-help"><span>[a] about</span><span>[c] career</span><span>[s] skills</span><span>[m] message</span></div></footer>
+    <section class="message-panel" id="message-panel" aria-labelledby="message-title">
+      <div class="message-inner">
+        <div class="message-intro"><h2 id="message-title">Start a conversation.</h2><p>Share a little context and I’ll respond as soon as I can.</p><button class="close" id="close-button" type="button">Close form</button></div>
+        <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
+          <input type="hidden" name="form-name" value="contact">
+          <div class="form-grid">
+            <div class="field"><label for="contact-name">Name</label><input id="contact-name" name="name" autocomplete="name" required></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field full"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
+          </div>
+          <button class="send" type="submit">Send message</button>
+        </form>
+      </div>
+    </section>
   </main>
 
   <script>
-    const root = document.documentElement;
-    const views = [...document.querySelectorAll('.view')];
-    const themeButton = document.querySelector('#theme');
+    const panel = document.querySelector('#message-panel');
+    const openButton = document.querySelector('#message-button');
+    const closeButton = document.querySelector('#close-button');
 
-    function showView(id, updateHash = true) {
-      const target = document.getElementById(id) || document.getElementById('home');
-      views.forEach((view) => view.classList.toggle('active', view === target));
-      if (updateHash) history.replaceState(null, '', id === 'home' ? location.pathname : `#${id}`);
-      target.querySelector('h1, h2, input')?.focus?.({ preventScroll: true });
+    function setForm(open) {
+      panel.classList.toggle('open', open);
+      openButton.setAttribute('aria-expanded', String(open));
+      if (open) {
+        history.replaceState(null, '', '#contact');
+        setTimeout(() => document.querySelector('#contact-name').focus(), 250);
+      } else {
+        history.replaceState(null, '', location.pathname);
+        openButton.focus();
+      }
     }
 
-    function toggleTheme() {
-      const dark = !root.classList.contains('dark');
-      root.classList.toggle('dark', dark);
-      themeButton.textContent = dark ? 'light' : 'dark';
-      themeButton.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
-    }
-
-    document.querySelectorAll('[data-view]').forEach((button) => button.addEventListener('click', () => showView(button.dataset.view)));
-    document.querySelectorAll('.back').forEach((button) => button.addEventListener('click', () => showView('home')));
-    themeButton.addEventListener('click', toggleTheme);
-
+    openButton.addEventListener('click', () => setForm(true));
+    closeButton.addEventListener('click', () => setForm(false));
     document.addEventListener('keydown', (event) => {
-      if (/input|textarea/i.test(document.activeElement.tagName)) return;
-      const key = event.key.toLowerCase();
-      const shortcuts = { a: 'about', c: 'career', s: 'skills', m: 'contact' };
-      if (shortcuts[key]) showView(shortcuts[key]);
-      if (key === 'x' || key === 'escape') showView('home');
-      if (key === 't') toggleTheme();
+      if (event.key === 'Escape' && panel.classList.contains('open')) setForm(false);
     });
-
-    showView(location.hash.slice(1) || 'home', false);
+    if (location.hash === '#contact') setForm(true);
   </script>
 </body>
 </html>
