@@ -1,402 +1,206 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dev Thonangi Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dev Thonangi is a Cleveland-based software engineer building production AI, computer vision, backend, and cloud systems.">
+  <meta name="theme-color" content="#080b12">
+  <title>Dev Thonangi — Software Engineer</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      color-scheme: dark;
+      --bg: #080b12;
+      --surface: #101622;
+      --surface-2: #151d2b;
+      --text: #f5f7fb;
+      --muted: #a4adbc;
+      --lime: #c8ff45;
+      --cyan: #45d9ff;
+      --pink: #ff5ebc;
+      --orange: #ff9e45;
+      --border: #293548;
+      --max: 1180px;
     }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #0f172a;
-      color: #f8fafc;
-      scroll-behavior: smooth;
-      font-size: 1.2rem;
-      line-height: 1.8;
+      margin: 0;
+      color: var(--text);
+      background:
+        linear-gradient(rgba(69,217,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(69,217,255,.035) 1px, transparent 1px),
+        var(--bg);
+      background-size: 42px 42px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
-    header {
-      position: fixed;
+
+    a { color: inherit; }
+    button, input, textarea { font: inherit; }
+    .shell { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+
+    .site-header {
+      position: sticky;
       top: 0;
-      width: 100%;
-      background: #1e293b;
-      padding: 1.5rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      font-size: 1.2rem;
+      z-index: 20;
+      border-bottom: 2px solid var(--border);
+      background: rgba(8,11,18,.9);
+      backdrop-filter: blur(14px);
     }
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
-    nav a {
-      color: #f8fafc;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
+    .header-inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-weight: 950; letter-spacing: -.04em; text-decoration: none; }
+    .brand span { color: var(--lime); }
+    nav { display: flex; gap: 22px; }
+    nav a { color: var(--muted); font-size: 13px; font-weight: 700; text-decoration: none; }
+    nav a:hover { color: var(--lime); }
 
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      color: white;
-      cursor: pointer;
-    }
+    .hero { min-height: calc(100vh - 72px); display: grid; grid-template-columns: minmax(0,1.25fr) minmax(320px,.75fr); gap: clamp(40px,8vw,100px); align-items: center; padding: 70px 0; }
+    .kicker { display: inline-block; margin: 0 0 22px; padding: 7px 11px; border: 2px solid var(--lime); color: var(--lime); background: #11180b; box-shadow: 5px 5px 0 #334510; font-family: monospace; font-size: 11px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(58px,9.2vw,116px); font-weight: 950; letter-spacing: -.075em; line-height: .82; text-transform: uppercase; }
+    h1 span { display: block; color: var(--cyan); text-shadow: 5px 5px 0 #173849; }
+    .hero-role { margin: 30px 0 0; font-family: monospace; font-size: clamp(16px,2vw,21px); line-height: 1.65; }
+    .hero-summary { max-width: 720px; margin: 20px 0 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 18px; border: 2px solid var(--text); color: var(--bg); background: var(--lime); box-shadow: 5px 5px 0 var(--text); font-size: 13px; font-weight: 900; text-decoration: none; text-transform: uppercase; transition: transform .15s, box-shadow .15s; }
+    .button.secondary { color: var(--text); background: var(--surface); }
+    .button:hover { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--text); }
 
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-        flex-direction: column;
-        background-color: #1e293b;
-        position: absolute;
-        top: 70px;
-        right: 0;
-        width: 100%;
-        padding: 1rem 2rem;
-      }
+    .profile-wrap { position: relative; justify-self: end; width: min(100%, 390px); }
+    .profile-frame { position: relative; overflow: hidden; aspect-ratio: 1; border: 3px solid var(--text); background: var(--surface-2); box-shadow: 14px 14px 0 var(--cyan); transform: rotate(2deg); }
+    .profile-frame img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .profile-note { position: absolute; left: -24px; bottom: -26px; padding: 12px 15px; border: 2px solid var(--text); color: var(--bg); background: var(--pink); box-shadow: 5px 5px 0 var(--text); font-family: monospace; font-size: 12px; font-weight: 900; transform: rotate(-3deg); }
 
-      nav.active {
-        display: flex;
-      }
+    section { padding: 90px 0; border-top: 2px solid var(--border); }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 36px; }
+    .section-heading h2 { margin: 0; font-family: monospace; font-size: clamp(33px,5vw,62px); letter-spacing: -.055em; text-transform: uppercase; }
+    .section-heading h2::before { content: "// "; color: var(--lime); }
+    .section-heading p { max-width: 480px; margin: 0; color: var(--muted); line-height: 1.6; }
 
-      .menu-toggle {
-        display: block;
-      }
-    }
+    .about-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .card { position: relative; padding: 24px; border: 2px solid var(--border); background: var(--surface); box-shadow: 7px 7px 0 #05070b; transition: transform .18s, border-color .18s, box-shadow .18s; }
+    .card:hover { transform: translate(-3px,-3px); border-color: var(--cyan); box-shadow: 10px 10px 0 #153142; }
+    .card-label { display: block; margin-bottom: 22px; color: var(--cyan); font-family: monospace; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .card h3 { margin: 0 0 9px; font-size: 20px; letter-spacing: -.03em; }
+    .card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .card.current { border-color: var(--lime); }
+    .card.education { border-color: var(--pink); }
 
-    section {
-      padding: 120px 3rem;
-      position: relative;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    .proud-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .proud-card { min-height: 270px; display: flex; flex-direction: column; }
+    .metric { margin-top: auto; padding-top: 28px; color: var(--lime); font-family: monospace; font-size: 30px; font-weight: 900; }
+
+    .timeline { border-left: 3px solid var(--lime); margin-left: 10px; padding-left: 34px; }
+    .role { position: relative; display: grid; grid-template-columns: 185px 1fr; gap: 28px; padding: 0 0 38px; }
+    .role:last-child { padding-bottom: 0; }
+    .role::before { content: ""; position: absolute; left: -43px; top: 5px; width: 15px; height: 15px; border: 3px solid var(--bg); background: var(--lime); box-shadow: 0 0 0 2px var(--lime); }
+    .role time { color: var(--lime); font-family: monospace; font-size: 12px; font-weight: 800; }
+    .role h3 { margin: 0 0 5px; font-size: 22px; }
+    .role .company { margin: 0 0 11px; color: var(--cyan); font-weight: 800; }
+    .role p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill { padding: 10px 13px; border: 2px solid var(--border); background: var(--surface); box-shadow: 3px 3px 0 #05070b; font-family: monospace; font-size: 12px; font-weight: 700; }
+    .skill:nth-child(4n+1) { border-color: var(--cyan); }
+    .skill:nth-child(4n+2) { border-color: var(--lime); }
+    .skill:nth-child(4n+3) { border-color: var(--pink); }
+    .skill:nth-child(4n) { border-color: var(--orange); }
+
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .project-card { min-height: 250px; display: flex; flex-direction: column; }
+    .project-card .stack { margin-top: auto; padding-top: 24px; color: var(--cyan); font-family: monospace; font-size: 10px; line-height: 1.6; text-transform: uppercase; }
+
+    .contact-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(40px,8vw,100px); }
+    .contact-copy h3 { margin: 0 0 18px; font-size: clamp(32px,5vw,58px); letter-spacing: -.055em; line-height: 1; }
+    .contact-copy p { color: var(--muted); line-height: 1.7; }
+    .social-links { display: flex; gap: 18px; margin-top: 28px; }
+    .social-links a { color: var(--lime); font-family: monospace; font-weight: 800; text-underline-offset: 5px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { margin-bottom: 13px; }
+    .field.full { grid-column: 1 / -1; }
+    label { display: block; margin-bottom: 7px; color: var(--muted); font-family: monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+    input, textarea { width: 100%; padding: 13px; border: 2px solid var(--border); border-radius: 0; outline: none; color: var(--text); background: var(--surface); }
+    textarea { min-height: 120px; resize: vertical; }
+    input:focus, textarea:focus { border-color: var(--lime); box-shadow: 4px 4px 0 #334510; }
+    .submit { width: 100%; min-height: 49px; border: 2px solid var(--text); color: var(--bg); background: var(--lime); box-shadow: 5px 5px 0 var(--text); font-weight: 900; text-transform: uppercase; cursor: pointer; }
+
+    footer { min-height: 90px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 2px solid var(--border); color: var(--muted); font-family: monospace; font-size: 11px; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .profile-wrap { justify-self: start; width: min(75vw,390px); }
+      .about-grid { grid-template-columns: 1fr 1fr; }
+      .proud-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
     }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
+    @media (max-width: 620px) {
+      .shell { width: min(calc(100% - 24px),var(--max)); }
+      nav a:not(:last-child) { display: none; }
+      .hero { min-height: auto; padding: 60px 0 75px; }
+      .section-heading { align-items: start; flex-direction: column; }
+      section { padding: 70px 0; }
+      .about-grid, .project-grid { grid-template-columns: 1fr; }
+      .role { grid-template-columns: 1fr; gap: 8px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      footer { align-items: start; flex-direction: column; justify-content: center; }
     }
-    .hero {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding-top: 100px;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-    }
-    .hero p {
-      font-size: 1.4rem;
-      max-width: 800px;
-    }
-    .btn {
-      padding: 1rem 2rem;
-      background: #3b82f6;
-      border: none;
-      color: white;
-      font-weight: bold;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      margin-top: 1.5rem;
-      font-size: 1.2rem;
-    }
-    .projects .project {
-      margin-bottom: 2.5rem;
-    }
-    .projects a {
-      color: #60a5fa;
-      text-decoration: underline;
-      margin-left: 0.5rem;
-    }
-    .skills ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.25rem;
-      margin-top: 1.25rem;
-    }
-    .skills li {
-      background: #1e40af;
-      padding: 0.75rem 1.25rem;
-      border-radius: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 1.2rem;
-    }
-    .skills i {
-      font-size: 1.4rem;
-    }
-    .contact-buttons {
-      display: flex;
-      gap: 1.25rem;
-      margin-top: 2rem;
-      justify-content: center;
-    }
-    .contact-buttons a {
-      text-decoration: none;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 0.5rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 1.15rem;
-    }
-    .github-btn {
-      background-color: #24292e;
-    }
-    .linkedin-btn {
-      background-color: #0a66c2;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #1e293b;
-      font-size: 1.1rem;
-    }
-    #scrollTopBtn {
-      display: none;
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 999;
-      background-color: #3b82f6;
-      color: white;
-      border: none;
-      padding: 1rem;
-      border-radius: 50%;
-      font-size: 1.75rem;
-      cursor: pointer;
-    }
-    #contact p {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    #education h2, #education p {
-      text-align: center;
-      font-size: 1.3rem;
-    }
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
   </style>
 </head>
 <body>
-  <header>
-    <h2>DEV</h2>
-    <div class="menu-toggle" id="mobile-menu">
-      <i class="fas fa-bars"></i>
-    </div>
-    <nav id="nav-links">
-      <a href="#hero">Home</a>
-      <a href="#about">About</a>
-      <a href="#education">Education</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <header class="site-header">
+    <div class="shell header-inner"><a class="brand" href="#top">DEV<span>.</span>THONANGI</a><nav aria-label="Main navigation"><a href="#about">About</a><a href="#experience">Experience</a><a href="#work">Work</a><a href="#contact">Contact</a></nav></div>
   </header>
 
-  <section id="hero" class="hero" style="
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 8rem 2rem;
-    background: linear-gradient(270deg, #1e3a8a, #3b82f6, #0f172a);
-    background-size: 600% 600%;
-    animation: gradientFlow 15s ease infinite;
-    color: white;
-    flex-direction: column;
-    gap: 2rem;">
-    <img 
-      src="./assets/profile.png" 
-      alt="Profile Picture" 
-      style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 30px rgba(0,0,0,0.4); animation: fadeIn 2s ease forwards;"
-    />
-    <div style="animation: fadeIn 2s ease 0.5s forwards; opacity: 0;">
-      <h1 style="font-size: 3rem; margin-bottom: 1rem;">Hi, I’m Dev Thonangi</h1>
-      <p style="font-size: 1.4rem; max-width: 700px; margin: 0 auto;"> AI/ML • Backend & Distributed Systems  • Cloud Infrastructure</p>
-      <a href="#contact"><button class="btn" style="margin-top: 2rem;">Contact Me</button></a>
-    </div>
-  </section>
+  <main>
+    <section class="shell hero" id="top">
+      <div>
+        <p class="kicker">Cleveland-based software engineer</p>
+        <h1>Dev<span>Thonangi</span></h1>
+        <p class="hero-role">Production AI / Computer Vision / Backend Systems / Cloud</p>
+        <p class="hero-summary">I build dependable software across edge, cloud, and distributed environments. My work turns complex AI and data problems into reliable products that perform under real-world constraints.</p>
+        <div class="hero-actions"><a class="button" href="#contact">Start a conversation</a><a class="button secondary" href="https://github.com/devthonangi" target="_blank" rel="noopener noreferrer">View GitHub</a></div>
+      </div>
+      <div class="profile-wrap"><div class="profile-frame"><img src="./assets/profile.png" alt="Illustrated portrait of Dev Thonangi"></div><span class="profile-note">5 years building production systems</span></div>
+    </section>
 
+    <section id="about"><div class="shell"><div class="section-heading"><h2>About me</h2><p>A practical engineer who values ownership, clear communication, and systems people can trust.</p></div><div class="about-grid">
+      <article class="card current"><span class="card-label">Current role</span><h3>KeyBank</h3><p>Software Engineer building AI-enabled data and automation workflows for enterprise banking in Cleveland.</p></article>
+      <article class="card"><span class="card-label">Experience</span><h3>Five years</h3><p>Banking, healthcare, research, computer vision, edge AI, cloud services, and distributed systems.</p></article>
+      <article class="card education"><span class="card-label">Education</span><h3>FAU</h3><p>MS in Computer and Information Science, AI major, 4.0 GPA, and 90% tuition waiver.</p></article>
+      <article class="card"><span class="card-label">Principle</span><h3>Useful over flashy</h3><p>Measure the system, understand the tradeoffs, and build the simplest reliable solution.</p></article>
+    </div></div></section>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I'm a Software Development Engineer specializing in AI/ML with a deep interest in building intelligent, efficient systems across cloud and edge. With 3+ years of experience in deep learning, computer vision, NLP, Edge AI, and distributed backend architectures using Python, Java, and AWS. I enjoy translating complex ideas into practical, scalable solutions. I’ve contributed to real-time inference pipelines, optimized model performance. I thrive in fast-moving, collaborative environments where curiosity, clarity, and problem-solving matter as much as code. Always learning.
-    </p>
-  </section>
+    <section><div class="shell"><div class="section-heading"><h2>Work I value</h2><p>Selected outcomes from production AI, edge computing, and distributed backend work.</p></div><div class="proud-grid">
+      <article class="card proud-card"><span class="card-label">Enterprise AI</span><h3>Faster banking workflows</h3><p>Developing validated AI and automation workflows with monitoring, exception handling, and execution tracking.</p><strong class="metric">25% faster</strong></article>
+      <article class="card proud-card"><span class="card-label">AI infrastructure</span><h3>Scalable inference services</h3><p>Architected production healthcare AI services with efficient request handling and system-level optimization.</p><strong class="metric">2x throughput</strong></article>
+      <article class="card proud-card"><span class="card-label">Edge AI</span><h3>Real-time vision on Jetson</h3><p>Optimized object detection and segmentation pipelines with TensorRT, ONNX Runtime, and CUDA.</p><strong class="metric">60+ FPS</strong></article>
+    </div></div></section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <p>🎓 Master's in Computer and Information Science (AI Major), Florida Atlantic University, USA</p>
-    <p>🎓 Bachelor of Technology in Computer Science, JNTUk, India</p>
-  </section>
+    <section id="experience"><div class="shell"><div class="section-heading"><h2>Experience</h2><p>From high-availability banking platforms to production AI and accelerated computer vision.</p></div><div class="timeline">
+      <article class="role"><time>JUL 2026 — PRESENT</time><div><h3>Software Engineer</h3><p class="company">KeyBank · Cleveland, Ohio</p><p>Building AI-enabled data and automation workflows with validation, monitoring, controls, and enterprise integration.</p></div></article>
+      <article class="role"><time>DEC 2025 — JUL 2026</time><div><h3>AI Engineer</h3><p class="company">UnitedHealth Group · Irving, Texas</p><p>Built scalable inference services, distributed ingestion pipelines, and model evaluation workflows for enterprise healthcare applications.</p></div></article>
+      <article class="role"><time>JAN 2024 — DEC 2025</time><div><h3>Computer Vision, Edge AI & ML Validation</h3><p class="company">Florida Atlantic University · Boca Raton, Florida</p><p>Developed real-time vision systems, optimized NVIDIA Jetson inference, and designed reproducible model benchmarking workflows.</p></div></article>
+      <article class="role"><time>JUN 2022 — JUN 2023</time><div><h3>Systems Engineer</h3><p class="company">Infosys · Bangalore, India</p><p>Built cloud-native backend services, event-driven architectures, document processing, and automated delivery workflows.</p></div></article>
+      <article class="role"><time>MAY 2021 — JUN 2022</time><div><h3>IT Associate</h3><p class="company">Visakhapatnam Co-operative Bank · India</p><p>Supported high-availability banking systems, document workflows, incident response, and operational reliability.</p></div></article>
+    </div></div></section>
 
-  <section id="projects" class="projects">
-    <h2>Projects</h2>
-  
-    <div class="project">
-      <h3>AI Market Trends Predictor</h3>
-      <p>FastAPI, Prophet, NLP, SQLite — AI-powered stock forecasting tool achieving 85% accuracy, processing 1000s of requests/sec.</p>
-      <a href="https://github.com/devthonangi/ai_market_trends_predictor" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> View My Project on GitHub
-      </a>
-    </div>
-  
-    <div class="project">
-      <h3>GPU-Accelerated Video Processing</h3>
-      <p>CUDA, PyTorch, TensorFlow — Real-time deep learning pipeline reducing video processing time by 45% with multi-GPU acceleration.</p>
-      <a href="https://github.com/devthonangi/GPU_accelerated_video_processing" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> View My Project on GitHub
-      </a>
-    </div>
-  
-    <div class="project">
-      <h3>Scalable IoT Data Processing</h3>
-      <p>AWS, Java, Kafka, PostgreSQL, Terraform — Event-driven system processing 10K+ IoT streams, improving data ingestion speed by 50%.</p>
-      <a href="https://github.com/devthonangi/scalable_IoT_data_processing" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> View My Project on GitHub
-      </a>
-    </div>
-  
-    <div class="project">
-      <h3>E-Commerce Recommendation Engine</h3>
-      <p>Python, Django, PostgreSQL, Redis — Collaborative filtering model improving user engagement by 15% and reducing query latency by 35%.</p>
-      <a href="https://github.com/devthonangi/ecommerce-recommendation" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> View My Project on GitHub
-      </a>
-    </div>
-  
-    <div class="project">
-      <h3>FastAPI URL Shortener</h3>
-      <p>FastAPI, SQLite, SHA-256 — High-performance URL shortener with 99.9% uptime and sub-100ms response latency.</p>
-      <a href="https://github.com/devthonangi/fastapi-url-shortener" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> View My Project on GitHub
-      </a>
-    </div>
-  
-  <div class="project">
-    <h3>Skin Disease Classifier</h3>
-    <p>
-      Flask, PyTorch, CNN, HAM10000 — Web app that classifies skin diseases with 94.5% accuracy using a CNN model and a clean UI for image upload & predictions.
-    </p>
-    <a href="https://github.com/devthonangi/skin_disease_classifier" target="_blank" rel="noopener noreferrer">
-      <i class="fab fa-github"></i> View My Project on GitHub
-    </a>
-  </div>
-</section>
-  
-  <section id="skills" class="skills">
-    <h2>Skills</h2>
-  
-    <h3 style="margin-top: 2rem;">Key Technologies</h3>
-    <ul>
-      <li><i class="fab fa-python"></i> Python</li>
-      <li><i class="fab fa-java"></i> Java</li>
-      <li><i class="fab fa-js"></i> JavaScript</li>
-      <li><i class="fas fa-code"></i> C++</li>
-      <li><i class="fab fa-docker"></i> Docker</li>
-      <li><i class="fab fa-aws"></i> AWS</li>
-      <li><i class="fab fa-linux"></i> Linux (Embedded & Server)</li>
-      <li><i class="fas fa-network-wired"></i> FastAPI</li>
-    </ul>
-  
-    <h3 style="margin-top: 2.5rem;">Skills That Make Me Stand Out</h3>
-    <ul>
-      <li><i class="fas fa-microchip"></i> NVIDIA Jetson TX2, Orin, Nano</li>
-      <li><i class="fas fa-brain"></i> PyTorch & Deep Learning</li>
-      <li><i class="fas fa-project-diagram"></i> Scalable Backend Systems</li>
-      <li><i class="fas fa-cogs"></i> CUDA Optimization</li>
-      <li><i class="fas fa-database"></i> PostgreSQL & Redis</li>
-      <li><i class="fas fa-cloud"></i> Serverless & Event-Driven Architecture</li>
-      <li><i class="fas fa-robot"></i> Edge AI & IoT Integration</li>
-    </ul>
-  </section>
-  
+    <section><div class="shell"><div class="section-heading"><h2>Tech stack</h2><p>Tools I use to move from data and models to dependable deployed systems.</p></div><div class="skills">
+      <span class="skill">Python</span><span class="skill">C++</span><span class="skill">Java</span><span class="skill">SQL</span><span class="skill">PyTorch</span><span class="skill">OpenCV</span><span class="skill">YOLOv8</span><span class="skill">CUDA</span><span class="skill">TensorRT</span><span class="skill">ONNX Runtime</span><span class="skill">NVIDIA Jetson</span><span class="skill">FastAPI</span><span class="skill">Spring Boot</span><span class="skill">AWS</span><span class="skill">Docker</span><span class="skill">Kubernetes</span><span class="skill">Terraform</span><span class="skill">Kafka</span><span class="skill">RabbitMQ</span><span class="skill">PostgreSQL</span><span class="skill">Prometheus</span><span class="skill">Grafana</span>
+    </div></div></section>
 
-  <!-- Contact  -->
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <p>Let’s connect over a virtual coffee ☕️. Feel free to drop your info and I’ll get back to you!</p>
-  
-    <form name="contact" method="POST" data-netlify="true" action="/thank-you.html"
-        style="max-width: 600px; margin: 2rem auto; display: flex; flex-direction: column; gap: 1rem;">
-        <input type="hidden" name="form-name" value="contact" />
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit" class="btn">Send Message</button>
-    </form>
-  
-    <div class="contact-buttons">
-      <a href="https://github.com/devthonangi" class="github-btn" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> GitHub
-      </a>
-      <a href="https://linkedin.com/in/thonangidev" class="linkedin-btn" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-linkedin"></i> LinkedIn
-      </a>
-    </div>
-  </section>
-  
-  <footer>
-    <p>&copy; 2025 Dev Thonangi. All rights reserved.</p>
-  </footer>
+    <section id="work"><div class="shell"><div class="section-heading"><h2>Selected work</h2><p>Systems that combine AI, real-time processing, observability, and production engineering.</p></div><div class="project-grid">
+      <article class="card project-card"><span class="card-label">Multimodal AI</span><h3>GenAI and RAG System</h3><p>Visual question answering, contextual retrieval, multi-step reasoning, and GPU-accelerated FastAPI inference.</p><span class="stack">PyTorch / LLaVA / LangGraph / FAISS / CUDA</span></article>
+      <article class="card project-card"><span class="card-label">Distributed systems</span><h3>IoT Telemetry Platform</h3><p>Low-latency ingestion and persistence for more than 1,000 devices with validation, monitoring, and scalable event processing.</p><span class="stack">Java / Spring Boot / Kafka / PostgreSQL / AWS</span></article>
+      <article class="card project-card"><span class="card-label">Accelerated computing</span><h3>Deep Learning Energy Profiler</h3><p>Measured inference latency, throughput, power, thermals, and GPU utilization across FP32, FP16, and TensorRT modes.</p><span class="stack">PyTorch / CUDA / TensorRT / Prometheus / Grafana</span></article>
+      <article class="card project-card"><span class="card-label">Computer vision</span><h3>Driver Monitoring System</h3><p>Real-time fatigue detection from live camera streams with temporal smoothing and reliable operation under changing light.</p><span class="stack">Python / OpenCV / MediaPipe</span></article>
+    </div></div></section>
 
-  <button onclick="topFunction()" id="scrollTopBtn" title="Go to top"><i class="fas fa-chevron-up"></i></button>
+    <section id="contact"><div class="shell contact-grid"><div class="contact-copy"><p class="kicker">Get in touch</p><h3>Have a problem worth solving?</h3><p>Send a short note about the role, system, or collaboration you have in mind. I’ll get back to you as soon as I can.</p><div class="social-links"><a href="https://github.com/devthonangi" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/thonangidev/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div><form name="contact" method="POST" data-netlify="true" action="/thank-you.html"><input type="hidden" name="form-name" value="contact"><div class="form-grid"><div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div><div class="field full"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div></div><button class="submit" type="submit">Send message</button></form></div></section>
+  </main>
 
-  <script>
-    // Scroll reveal
-    const sections = document.querySelectorAll('section');
-    const revealOnScroll = () => {
-      const triggerBottom = window.innerHeight * 0.85;
-      sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < triggerBottom) {
-          section.classList.add('visible');
-        }
-      });
-    };
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll);
-
-    // Scroll-to-top button
-    const btn = document.getElementById("scrollTopBtn");
-    window.onscroll = function () {
-      btn.style.display = (document.documentElement.scrollTop > 200) ? "block" : "none";
-    };
-    function topFunction() {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    }
-
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('mobile-menu');
-    const navLinks = document.getElementById('nav-links');
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-  </script>
+  <footer class="shell"><span>© <span id="year"></span> Dev Thonangi · Cleveland, Ohio</span><span>Built for clarity, speed, and reliability.</span></footer>
+  <script>document.querySelector('#year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
