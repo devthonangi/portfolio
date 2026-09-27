@@ -1,7 +1,3 @@
-# MY Portfolio
-
-Personal portfolio for a Cleveland-based software engineer focused on AI, computer vision, backend systems, and cloud infrastructure.
-
 ## Live site
 
 [devtportfolio.netlify.app](https://devtportfolio.netlify.app)
