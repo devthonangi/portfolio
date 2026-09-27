@@ -64,6 +64,15 @@
     .id-person p { margin: 0; font-family: monospace; font-size: 11px; font-weight: 800; line-height: 1.6; }
     .id-interests { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
     .id-interests span { padding: 6px 8px; border: 2px solid var(--bg); border-radius: 999px; background: rgba(255,255,255,.3); font-size: 11px; font-weight: 800; }
+    .id-details { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 18px; }
+    .id-detail { padding: 9px; border: 2px solid var(--bg); background: rgba(255,255,255,.27); }
+    .id-detail small { display: block; margin-bottom: 3px; font-family: monospace; font-size: 8px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .id-detail strong { display: block; font-size: 11px; line-height: 1.35; }
+    .id-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin-bottom: 14px; }
+    .id-link { min-height: 38px; display: grid; place-items: center; padding: 6px; border: 2px solid var(--bg); color: var(--bg); background: rgba(255,255,255,.34); font-size: 10px; font-weight: 900; text-align: center; text-decoration: none; text-transform: uppercase; cursor: pointer; }
+    .id-link:hover, .id-link:focus-visible { color: var(--text); background: var(--surface); outline: none; transform: translateY(-2px); }
+    .id-socials { display: flex; justify-content: center; gap: 18px; margin-bottom: 15px; }
+    .id-socials a { color: var(--bg); font-family: monospace; font-size: 10px; font-weight: 900; text-underline-offset: 3px; text-transform: uppercase; }
     .enter-site { width: 100%; min-height: 50px; border: 3px solid var(--bg); color: var(--text); background: var(--surface); box-shadow: 5px 5px 0 var(--bg); font-weight: 950; text-transform: uppercase; cursor: pointer; }
     .enter-site:hover { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--bg); }
     .id-hint { margin: 14px 0 0; text-align: center; font-family: monospace; font-size: 9px; font-weight: 800; text-transform: uppercase; }
@@ -185,6 +194,7 @@
       .life-card:nth-child(n) { transform: none; }
       .id-person { grid-template-columns: 86px 1fr; }
       .id-photo { width:86px; height:86px; }
+      .id-nav { grid-template-columns: 1fr 1fr; }
       .role { grid-template-columns: 1fr; gap: 8px; }
       .form-grid { grid-template-columns: 1fr; }
       .field.full { grid-column: auto; }
@@ -201,9 +211,24 @@
         <div class="id-photo"><img src="./assets/profile.png" alt="Illustrated portrait of Dev Thonangi"></div>
         <div><h2 id="id-name">Dev Thonangi</h2><p>Software Engineer<br>Cleveland, Ohio<br>ID: DEV-05</p></div>
       </div>
+      <div class="id-details">
+        <div class="id-detail"><small>Current</small><strong>KeyBank</strong></div>
+        <div class="id-detail"><small>Experience</small><strong>Five years</strong></div>
+        <div class="id-detail"><small>Education</small><strong>MS CS · AI · 4.0</strong></div>
+        <div class="id-detail"><small>Focus</small><strong>AI · Vision · Backend</strong></div>
+      </div>
       <div class="id-interests" aria-label="Personal interests"><span>🏋️ Gym</span><span>🥊 Boxing</span><span>🎮 Valorant</span><span>🏎️ Cars</span><span>🏍️ Bikes</span><span>✈️ Travel</span></div>
-      <button class="enter-site" id="enter-site" type="button">Enter portfolio</button>
-      <p class="id-hint">Press Enter to continue</p>
+      <nav class="id-nav" aria-label="ID card portfolio navigation">
+        <a class="id-link" href="#about" data-section="about">About</a>
+        <a class="id-link" href="#experience" data-section="experience">Experience</a>
+        <a class="id-link" href="#skills" data-section="skills">Skills</a>
+        <a class="id-link" href="#work" data-section="work">Work</a>
+        <a class="id-link" href="#beyond-code" data-section="beyond-code">Beyond code</a>
+        <a class="id-link" href="#contact" data-section="contact">Contact</a>
+      </nav>
+      <div class="id-socials"><a href="https://github.com/devthonangi" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/thonangidev/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+      <button class="enter-site" id="enter-site" type="button">Open full portfolio</button>
+      <p class="id-hint">Choose a section or press Enter</p>
     </article>
   </div>
 
@@ -250,7 +275,7 @@
       <article class="role"><time>MAY 2021 — JUN 2022</time><div><h3>IT Associate</h3><p class="company">Visakhapatnam Co-operative Bank · India</p><p>Supported high-availability banking systems, document workflows, incident response, and operational reliability.</p></div></article>
     </div></div></section>
 
-    <section><div class="shell"><div class="section-heading"><h2>Tech stack</h2><p>Tools I use to move from data and models to dependable deployed systems.</p></div><div class="skills">
+    <section id="skills"><div class="shell"><div class="section-heading"><h2>Tech stack</h2><p>Tools I use to move from data and models to dependable deployed systems.</p></div><div class="skills">
       <span class="skill">Python</span><span class="skill">C++</span><span class="skill">Java</span><span class="skill">SQL</span><span class="skill">PyTorch</span><span class="skill">OpenCV</span><span class="skill">YOLOv8</span><span class="skill">CUDA</span><span class="skill">TensorRT</span><span class="skill">ONNX Runtime</span><span class="skill">NVIDIA Jetson</span><span class="skill">FastAPI</span><span class="skill">Spring Boot</span><span class="skill">AWS</span><span class="skill">Docker</span><span class="skill">Kubernetes</span><span class="skill">Terraform</span><span class="skill">Kafka</span><span class="skill">RabbitMQ</span><span class="skill">PostgreSQL</span><span class="skill">Prometheus</span><span class="skill">Grafana</span>
     </div></div></section>
 
@@ -269,18 +294,26 @@
     document.querySelector('#year').textContent = new Date().getFullYear();
     const gate = document.querySelector('#id-gate');
     const enterButton = document.querySelector('#enter-site');
+    const sectionLinks = document.querySelectorAll('[data-section]');
     document.body.classList.add('locked');
 
-    function enterPortfolio() {
+    function enterPortfolio(targetId = 'top') {
       gate.classList.add('hidden');
       document.body.classList.remove('locked');
-      history.replaceState(null, '', '#top');
-      document.querySelector('.brand').focus();
+      history.replaceState(null, '', `#${targetId}`);
+      setTimeout(() => {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelector('.brand').focus({ preventScroll: true });
+      }, 180);
     }
 
-    enterButton.addEventListener('click', enterPortfolio);
+    enterButton.addEventListener('click', () => enterPortfolio('top'));
+    sectionLinks.forEach((link) => link.addEventListener('click', (event) => {
+      event.preventDefault();
+      enterPortfolio(link.dataset.section);
+    }));
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' && !gate.classList.contains('hidden')) enterPortfolio();
+      if (event.key === 'Enter' && event.target === document.body && !gate.classList.contains('hidden')) enterPortfolio('top');
     });
   </script>
 </body>
