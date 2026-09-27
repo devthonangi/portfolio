@@ -296,24 +296,39 @@
     const enterButton = document.querySelector('#enter-site');
     const sectionLinks = document.querySelectorAll('[data-section]');
     document.body.classList.add('locked');
+    history.replaceState({ screen: 'id' }, '', `${location.pathname}${location.search}`);
 
-    function enterPortfolio(targetId = 'top') {
+    function showPortfolio(targetId = 'top', addHistory = true) {
       gate.classList.add('hidden');
       document.body.classList.remove('locked');
-      history.replaceState(null, '', `#${targetId}`);
+      if (addHistory) history.pushState({ screen: 'portfolio', targetId }, '', `#${targetId}`);
       setTimeout(() => {
         document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         document.querySelector('.brand').focus({ preventScroll: true });
       }, 180);
     }
 
-    enterButton.addEventListener('click', () => enterPortfolio('top'));
+    function showIdCard() {
+      gate.classList.remove('hidden');
+      document.body.classList.add('locked');
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      setTimeout(() => enterButton.focus({ preventScroll: true }), 100);
+    }
+
+    enterButton.addEventListener('click', () => showPortfolio('top'));
     sectionLinks.forEach((link) => link.addEventListener('click', (event) => {
       event.preventDefault();
-      enterPortfolio(link.dataset.section);
+      showPortfolio(link.dataset.section);
     }));
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' && event.target === document.body && !gate.classList.contains('hidden')) enterPortfolio('top');
+      if (event.key === 'Enter' && event.target === document.body && !gate.classList.contains('hidden')) showPortfolio('top');
+    });
+    window.addEventListener('popstate', (event) => {
+      if (event.state?.screen === 'portfolio' || location.hash) {
+        showPortfolio(event.state?.targetId || location.hash.slice(1) || 'top', false);
+      } else {
+        showIdCard();
+      }
     });
   </script>
 </body>
