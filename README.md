@@ -1,4 +1,4 @@
-# Dev Thonangi — Portfolio
+# MY Portfolio
 
 Personal portfolio for a Cleveland-based software engineer focused on AI, computer vision, backend systems, and cloud infrastructure.
 
